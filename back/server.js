@@ -24,6 +24,9 @@ app.use("/items", itemsRouter);
 const usersRouter = require("./routes/users");
 app.use("/users", usersRouter);
 
+const signinRouter = require("./routes/signin");
+app.use("/signin", signinRouter);
+
 // Start server
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
