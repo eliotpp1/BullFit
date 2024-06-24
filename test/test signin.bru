@@ -1,0 +1,19 @@
+meta {
+  name: test signin
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:5000/login
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "username": "Antonin",
+    "password": "13Eliot13*!"
+  }
+  
+}

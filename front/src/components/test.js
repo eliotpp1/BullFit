@@ -11,18 +11,31 @@ const Test = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/items")
-      .then((response) => setItems(response.data))
-      .catch((error) => console.error("Error fetching items: ", error));
-  }, []);
+    // Vérifier si l'utilisateur est authentifié (a un jeton JWT valide)
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/signin"); // Rediriger vers la page de connexion si aucun jeton n'est trouvé
+    } else {
+      // Charger les éléments et utilisateurs uniquement si l'utilisateur est authentifié
+      axios
+        .get("http://localhost:5000/items", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => setItems(response.data))
+        .catch((error) => console.error("Error fetching items: ", error));
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:5000/users")
-      .then((response) => setUsers(response.data))
-      .catch((error) => console.error("Error fetching users: ", error));
-  }, []);
+      axios
+        .get("http://localhost:5000/users", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => setUsers(response.data))
+        .catch((error) => console.error("Error fetching users: ", error));
+    }
+  }, [navigate]);
 
   const addItem = () => {
     axios
