@@ -20,6 +20,17 @@ router.post("/", async (req, res) => {
   const user = new User({
     username: req.body.username,
     password: hashedPassword,
+    stats: {
+      speed: req.body.speed,
+      pace: req.body.pace,
+      calories: req.body.calories,
+      mas: req.body.mas,
+      fc65: req.body.fc65,
+      fc75: req.body.fc75,
+      fc85: req.body.fc85,
+      fc95: req.body.fc95,
+      fc100: req.body.fc100,
+    },
   });
 
   try {

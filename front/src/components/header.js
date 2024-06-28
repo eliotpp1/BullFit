@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Logo from "../assets/images/logo_bullfit.webp";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -20,6 +21,9 @@ const Header = () => {
     <header>
       <nav>
         <ul>
+          <li>
+            <img src={Logo} alt="Bullfit logo" style={{ width: "30vw" }} />
+          </li>
           <li>
             <button onClick={() => navigate("/")}>Home</button>
           </li>

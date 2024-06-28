@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const Calculator = () => {
   const [distance, setDistance] = useState(0);
@@ -21,60 +21,106 @@ const Calculator = () => {
   const [fc85, setFc85] = useState(0);
   const [fc95, setFc95] = useState(0);
   const [fc100, setFc100] = useState(0);
+  const [popup, setPopup] = useState(false);
 
   const onChangeDistance = (e) => {
-    setDistance(e.target.value);
+    setDistance(parseFloat(e.target.value));
   };
 
   const calculateAvgSpeed = (event) => {
     event.preventDefault();
-    const totalSeconds = hours * 3600 + minutes * 60 + parseInt(seconds);
+    const totalSeconds = hours * 3600 + minutes * 60 + parseInt(seconds, 10);
     const speed = distance / (totalSeconds / 3600);
     const pace = totalSeconds / 60 / distance;
     setSpeed(speed.toFixed(2));
     setPace(pace.toFixed(2));
-    localStorage.setItem("speed", speed);
-    localStorage.setItem("pace", pace);
+    localStorage.setItem("speed", speed.toFixed(2));
+    localStorage.setItem("pace", pace.toFixed(2));
   };
 
   const calculateCalories = (event) => {
     event.preventDefault();
     const caloriesBurned = 1.036 * weight * distance2;
     setCalories(caloriesBurned.toFixed(2));
-    localStorage.setItem("calories", caloriesBurned);
+    localStorage.setItem("calories", caloriesBurned.toFixed(2));
   };
 
   const calculateMAS = (event) => {
     event.preventDefault();
     const mas = weight2 / ((height / 100) * (height / 100));
     setMas(mas.toFixed(2));
-    localStorage.setItem("mas", mas);
+    localStorage.setItem("mas", mas.toFixed(2));
   };
 
   const calculateHRZ = (event) => {
     event.preventDefault();
 
-    // Assuming maximalHR and restingHR are state variables or defined elsewhere
-    // Convert restingHR to a number
-    const restingHRNumber = parseFloat(restingHR); // Use parseFloat to handle decimal numbers if needed
+    const restingHRNumber = parseFloat(restingHR);
+    const maximalHRNumber = parseFloat(maximalHR);
 
-    if (!isNaN(maximalHR) && !isNaN(restingHRNumber)) {
-      const fcReserve = maximalHR - restingHRNumber;
+    if (!isNaN(maximalHRNumber) && !isNaN(restingHRNumber)) {
+      const fcReserve = maximalHRNumber - restingHRNumber;
 
-      // Calculate and set each heart rate zone
-      setFc60(Math.round(restingHRNumber + 0.6 * fcReserve));
-      setFc65(Math.round(restingHRNumber + 0.65 * fcReserve));
-      setFc75(Math.round(restingHRNumber + 0.75 * fcReserve));
-      setFc85(Math.round(restingHRNumber + 0.85 * fcReserve));
-      setFc95(Math.round(restingHRNumber + 0.95 * fcReserve));
-      setFc100(maximalHR);
-      localStorage.setItem("fc65", fc65);
-      localStorage.setItem("fc75", fc75);
-      localStorage.setItem("fc85", fc85);
-      localStorage.setItem("fc95", fc95);
-      localStorage.setItem("fc100", fc100);
+      const newFc60 = Math.round(restingHRNumber + 0.6 * fcReserve);
+      const newFc65 = Math.round(restingHRNumber + 0.65 * fcReserve);
+      const newFc75 = Math.round(restingHRNumber + 0.75 * fcReserve);
+      const newFc85 = Math.round(restingHRNumber + 0.85 * fcReserve);
+      const newFc95 = Math.round(restingHRNumber + 0.95 * fcReserve);
+      const newFc100 = maximalHRNumber;
+
+      setFc60(newFc60);
+      setFc65(newFc65);
+      setFc75(newFc75);
+      setFc85(newFc85);
+      setFc95(newFc95);
+      setFc100(newFc100);
+
+      localStorage.setItem("fc60", newFc60);
+      localStorage.setItem("fc65", newFc65);
+      localStorage.setItem("fc75", newFc75);
+      localStorage.setItem("fc85", newFc85);
+      localStorage.setItem("fc95", newFc95);
+      localStorage.setItem("fc100", newFc100);
     }
   };
+
+  const popupSave = () => {
+    setPopup(!popup);
+  };
+
+  useEffect(() => {
+    localStorage.setItem("speed", 0);
+    localStorage.setItem("pace", 0);
+    localStorage.setItem("calories", 0);
+    localStorage.setItem("mas", 0);
+    localStorage.setItem("fc60", 0);
+    localStorage.setItem("fc65", 0);
+    localStorage.setItem("fc75", 0);
+    localStorage.setItem("fc85", 0);
+    localStorage.setItem("fc95", 0);
+    localStorage.setItem("fc100", 0);
+
+    setSpeed(localStorage.getItem("speed") || 0);
+    setPace(localStorage.getItem("pace") || 0);
+    setCalories(localStorage.getItem("calories") || 0);
+    setMas(localStorage.getItem("mas") || 0);
+    setFc60(localStorage.getItem("fc60") || 0);
+    setFc65(localStorage.getItem("fc65") || 0);
+    setFc75(localStorage.getItem("fc75") || 0);
+    setFc85(localStorage.getItem("fc85") || 0);
+    setFc95(localStorage.getItem("fc95") || 0);
+    setFc100(localStorage.getItem("fc100") || 0);
+  }, []);
+
+  useEffect(() => {
+    let counter = 0;
+    if (parseFloat(speed) !== 0) counter++;
+    if (parseFloat(pace) !== 0) counter++;
+    if (parseFloat(calories) !== 0) counter++;
+    if (parseFloat(mas) !== 0) counter++;
+    if (parseInt(fc60, 10) !== 0) counter++;
+    if (counter >= 4) popupSave();
+  }, [speed, pace, calories, mas, fc60]);
 
   return (
     <>
@@ -82,6 +128,17 @@ const Calculator = () => {
         <h1>Running Calculator</h1>
         <p>by BullFit</p>
       </div>
+
+      {popup && (
+        <div>
+          <h2>Save your results</h2>
+          <p>Do you want to save your results?</p>
+          <button onClick={() => (window.location.href = "/signin")}>
+            Sign In
+          </button>
+          <button onClick={popupSave}>No</button>
+        </div>
+      )}
 
       <div>
         <h2>Average speed and pace calculator</h2>
@@ -100,7 +157,7 @@ const Calculator = () => {
             id="hours"
             name="hours"
             value={hours}
-            onChange={(e) => setHours(e.target.value)}
+            onChange={(e) => setHours(parseInt(e.target.value, 10))}
           />
           <label htmlFor="minutes">Minutes</label>
           <input
@@ -108,7 +165,7 @@ const Calculator = () => {
             id="minutes"
             name="minutes"
             value={minutes}
-            onChange={(e) => setMinutes(e.target.value)}
+            onChange={(e) => setMinutes(parseInt(e.target.value, 10))}
           />
           <label htmlFor="seconds">Seconds</label>
           <input
@@ -116,7 +173,7 @@ const Calculator = () => {
             id="seconds"
             name="seconds"
             value={seconds}
-            onChange={(e) => setSeconds(e.target.value)}
+            onChange={(e) => setSeconds(parseInt(e.target.value, 10))}
           />
           <button type="submit">Calculate</button>
         </form>
@@ -137,7 +194,7 @@ const Calculator = () => {
             id="weight"
             name="weight"
             value={weight}
-            onChange={(e) => setWeight(e.target.value)}
+            onChange={(e) => setWeight(parseFloat(e.target.value))}
           />
           <label htmlFor="distance2">Distance (in km)</label>
           <input
@@ -145,7 +202,7 @@ const Calculator = () => {
             id="distance2"
             name="distance2"
             value={distance2}
-            onChange={(e) => setDistance2(e.target.value)}
+            onChange={(e) => setDistance2(parseFloat(e.target.value))}
           />
           <button type="submit">Calculate</button>
         </form>
@@ -164,7 +221,7 @@ const Calculator = () => {
             id="weight2"
             name="weight2"
             value={weight2}
-            onChange={(e) => setWeight2(e.target.value)}
+            onChange={(e) => setWeight2(parseFloat(e.target.value))}
           />
           <label htmlFor="height">Height (in cm)</label>
           <input
@@ -172,7 +229,7 @@ const Calculator = () => {
             id="height"
             name="height"
             value={height}
-            onChange={(e) => setHeight(e.target.value)}
+            onChange={(e) => setHeight(parseFloat(e.target.value))}
           />
           <button type="submit">Calculate</button>
         </form>
@@ -191,7 +248,7 @@ const Calculator = () => {
             id="restingHR"
             name="restingHR"
             value={restingHR}
-            onChange={(e) => setRestingHR(e.target.value)}
+            onChange={(e) => setRestingHR(parseFloat(e.target.value))}
           />
           <label htmlFor="maximalHR">Maximal heart rate</label>
           <input
@@ -199,7 +256,7 @@ const Calculator = () => {
             id="maximalHR"
             name="maximalHR"
             value={maximalHR}
-            onChange={(e) => setMaximalHR(e.target.value)}
+            onChange={(e) => setMaximalHR(parseFloat(e.target.value))}
           />
           <button type="submit">Calculate</button>
         </form>

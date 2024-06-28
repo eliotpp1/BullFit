@@ -8,6 +8,15 @@ const SignIn = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate(); // Utilisez useNavigate pour la navigation
+  const speed = localStorage.getItem("speed");
+  const pace = localStorage.getItem("pace");
+  const calories = localStorage.getItem("calories");
+  const mas = localStorage.getItem("mas");
+  const fc65 = localStorage.getItem("fc65");
+  const fc75 = localStorage.getItem("fc75");
+  const fc85 = localStorage.getItem("fc85");
+  const fc95 = localStorage.getItem("fc95");
+  const fc100 = localStorage.getItem("fc100");
 
   const onChangeUsername = (e) => {
     setUsername(e.target.value.trim());
@@ -46,6 +55,15 @@ const SignIn = () => {
       const res = await axios.post("http://localhost:5000/signin", {
         username,
         password,
+        speed,
+        pace,
+        calories,
+        mas,
+        fc65,
+        fc75,
+        fc85,
+        fc95,
+        fc100,
       });
       console.log(res.data);
       navigate("/login");

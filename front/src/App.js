@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./components/home";
 import SignIn from "./components/signin";
 import Test from "./components/test";
 import Login from "./components/login";
@@ -12,9 +13,9 @@ const App = () => {
     <Router>
       <Header />
       <Routes>
-        <Route path="/" element={<Test />} />
-        <Route path="/signin" element={<SignIn />} />
+        <Route path="/" element={<Home />} />
         <Route path="/test" element={<Test />} />
+        <Route path="/signin" element={<SignIn />} />
         <Route path="/login" element={<Login />} />
         <Route path="/calculator" element={<Calculator />} />
       </Routes>

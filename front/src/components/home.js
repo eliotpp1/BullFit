@@ -1,6 +1,7 @@
 //home component
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import MenRunning from "./../assets/images/Fitness-stats-rafiki.webp";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -25,11 +26,7 @@ const Home = () => {
           </div>
           <div className="home__line-vertical"></div>
           <div className="home__right">
-            <img
-              className="home__image"
-              src="./../assets/image/Cross country race-rafiki.png"
-              alt="couple running in the nature"
-            />
+            <img src={MenRunning}></img>
           </div>
         </div>
       </section>
@@ -43,7 +40,7 @@ const Home = () => {
           calories burned.
         </p>
         <button
-          onClick={() => handleNavigation("/running-calculator")}
+          onClick={() => handleNavigation("/calculator")}
           className="btn btn--calculate"
         >
           Calculate
@@ -57,10 +54,7 @@ const Home = () => {
           can find workouts for running, cycling, swimming, strength training,
           yoga, pilates, stretching, meditation and more.
         </p>
-        <button
-          onClick={() => handleNavigation("/workouts")}
-          className="btn btn--find"
-        >
+        <button onClick={() => handleNavigation("/")} className="btn btn--find">
           Find a workout
         </button>
       </section>
@@ -74,7 +68,7 @@ const Home = () => {
           your own workouts.
         </p>
         <button
-          onClick={() => handleNavigation("/createWorkouts")}
+          onClick={() => handleNavigation("/")}
           className="btn btn--create"
         >
           Create a workout
@@ -89,7 +83,7 @@ const Home = () => {
           workouts and your progress with your friends and your family.
         </p>
         <button
-          onClick={() => handleNavigation("/personalWorkout")}
+          onClick={() => handleNavigation("/")}
           className="btn btn--follow"
         >
           Follow your flow
