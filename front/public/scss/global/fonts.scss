@@ -1,0 +1,72 @@
+@font-face {
+  font-family: CeraBlack;
+  src: url("./../font/cera-pro/Cera-Pro-Black.woff") format("truetype");
+}
+
+@font-face {
+  font-family: CeraBold;
+  src: url("./../font/cera-pro/Cera-Pro-Bold.woff") format("truetype");
+}
+
+@font-face {
+  font-family: CeraMedium;
+  src: url("./../font/cera-pro/Cera-Pro-Medium.woff") format("truetype");
+}
+
+@font-face {
+  font-family: CeraRegular;
+  src: url("./../font/cera-pro/Cera-Pro-Regular.woff") format("truetype");
+}
+
+@font-face {
+  font-family: CeraThin;
+  src: url("./../font/cera-pro/Cera-Pro-Thin.woff") format("truetype");
+}
+
+$font-size-small: 0.875rem; // 14px
+$font-size-base: 1rem; // 16px
+$font-size-large: 1.25rem; // 20px
+$font-size-xlarge: 2rem; // 32px
+
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-bold: 700;
+
+body {
+  font-family: $font-primary;
+  font-size: $font-size-base;
+  font-weight: $font-weight-regular;
+  line-height: 1.5;
+  color: #333;
+}
+
+h1,
+h2,
+h4,
+h5,
+h6 {
+  font-family: $font-primary;
+  font-weight: $font-weight-bold;
+  line-height: 1.2;
+  margin: 0 0 1rem 0;
+}
+
+h1 {
+  font-size: $font-size-xlarge;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: $font-size-large;
+}
+
+p {
+  font-size: $font-size-base;
+}
+
+small {
+  font-size: $font-size-small;
+}
