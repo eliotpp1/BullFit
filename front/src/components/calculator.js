@@ -116,144 +116,189 @@ const Calculator = () => {
 
   return (
     <>
-      <div>
-        <h1>Running Calculator</h1>
-        <p>by BullFit</p>
+      <div className="header-calc">
+        <h1 className="header-calc-title">Running Calculator</h1>
+        <p className="header-calc-subtitle">by BullFit</p>
       </div>
 
       {popup && (
-        <div>
-          <h2>Save your results</h2>
-          <p>Do you want to save your results?</p>
-          <button onClick={() => navigate("/signin")}>Sign In</button>
-          <button onClick={popupSave}>No thanks</button>
+        <div className="popup">
+          <h2 className="popup-title">Save your results</h2>
+          <p className="popup-message">Do you want to save your results?</p>
+          <button
+            onClick={() => navigate("/signin")}
+            className="button-contained"
+          >
+            Sign In
+          </button>
+          <button onClick={popupSave} className="button-contained">
+            No thanks
+          </button>
         </div>
       )}
 
-      <div>
-        <h2>Average speed and pace calculator</h2>
-        <form onSubmit={calculateAvgSpeed}>
-          <label htmlFor="distance">Distance (in km)</label>
+      <div className="section">
+        <h2 className="section-title">Average speed and pace calculator</h2>
+        <form onSubmit={calculateAvgSpeed} className="form">
+          <label htmlFor="distance" className="form-label">
+            Distance (in km)
+          </label>
           <input
             type="number"
             id="distance"
             name="distance"
             value={distance}
             onChange={onChangeDistance}
+            className="form-input"
           />
-          <label htmlFor="hours">Hours</label>
+          <label htmlFor="hours" className="form-label">
+            Hours
+          </label>
           <input
             type="number"
             id="hours"
             name="hours"
             value={hours}
             onChange={(e) => setHours(parseInt(e.target.value, 10))}
+            className="form-input"
           />
-          <label htmlFor="minutes">Minutes</label>
+          <label htmlFor="minutes" className="form-label">
+            Minutes
+          </label>
           <input
             type="number"
             id="minutes"
             name="minutes"
             value={minutes}
             onChange={(e) => setMinutes(parseInt(e.target.value, 10))}
+            className="form-input"
           />
-          <label htmlFor="seconds">Seconds</label>
+          <label htmlFor="seconds" className="form-label">
+            Seconds
+          </label>
           <input
             type="number"
             id="seconds"
             name="seconds"
             value={seconds}
             onChange={(e) => setSeconds(parseInt(e.target.value, 10))}
+            className="form-input"
           />
-          <button type="submit">Calculate</button>
+          <button type="submit" className="button-contained">
+            Calculate
+          </button>
         </form>
       </div>
 
-      <div>
-        <h3>Results</h3>
+      <div className="section-result">
+        <h3 className="section-result-subtitle">Results</h3>
         <p>Speed: {speed} km/h</p>
         <p>Pace: {pace} min/km</p>
       </div>
 
-      <div>
-        <h2>Calories burned during race</h2>
-        <form onSubmit={calculateCalories}>
-          <label htmlFor="weight">Weight (in kg)</label>
+      <div className="section">
+        <h2 className="section-title">Calories burned during race</h2>
+        <form onSubmit={calculateCalories} className="form">
+          <label htmlFor="weight" className="form-label">
+            Weight (in kg)
+          </label>
           <input
             type="number"
             id="weight"
             name="weight"
             value={weight}
             onChange={(e) => setWeight(parseFloat(e.target.value))}
+            className="form-input"
           />
-          <label htmlFor="distance2">Distance (in km)</label>
+          <label htmlFor="distance2" className="form-label">
+            Distance (in km)
+          </label>
           <input
             type="number"
             id="distance2"
             name="distance2"
             value={distance2}
             onChange={(e) => setDistance2(parseFloat(e.target.value))}
+            className="form-input"
           />
-          <button type="submit">Calculate</button>
+          <button type="submit" className="button-contained">
+            Calculate
+          </button>
         </form>
       </div>
-      <div>
-        <h3>Results</h3>
+      <div className="section-result">
+        <h3 className="section-result-subtitle">Results</h3>
         <p>Calories burned: {calories}</p>
       </div>
 
-      <div>
-        <h2>Calculate your MAS</h2>
-        <form onSubmit={calculateMAS}>
-          <label htmlFor="weight2">Weight (in kg)</label>
+      <div className="section">
+        <h2 className="section-title">Calculate your MAS</h2>
+        <form onSubmit={calculateMAS} className="form">
+          <label htmlFor="weight2" className="form-label">
+            Weight (in kg)
+          </label>
           <input
             type="number"
             id="weight2"
             name="weight2"
             value={weight2}
             onChange={(e) => setWeight2(parseFloat(e.target.value))}
+            className="form-input"
           />
-          <label htmlFor="height">Height (in cm)</label>
+          <label htmlFor="height" className="form-label">
+            Height (in cm)
+          </label>
           <input
             type="number"
             id="height"
             name="height"
             value={height}
             onChange={(e) => setHeight(parseFloat(e.target.value))}
+            className="form-input"
           />
-          <button type="submit">Calculate</button>
+          <button type="submit" className="button-contained">
+            Calculate
+          </button>
         </form>
       </div>
-      <div>
-        <h3>Results</h3>
+      <div className="section-result">
+        <h3 className="section-result-subtitle">Results</h3>
         <p>MAS: {mas}</p>
       </div>
 
-      <div>
-        <h2>Calculate your heart rate zones</h2>
-        <form onSubmit={calculateHRZ}>
-          <label htmlFor="restingHR">Resting heart rate</label>
+      <div className="section">
+        <h2 className="section-title">Calculate your heart rate zones</h2>
+        <form onSubmit={calculateHRZ} className="form">
+          <label htmlFor="restingHR" className="form-label">
+            Resting heart rate
+          </label>
           <input
             type="number"
             id="restingHR"
             name="restingHR"
             value={restingHR}
             onChange={(e) => setRestingHR(parseFloat(e.target.value))}
+            className="form-input"
           />
-          <label htmlFor="maximalHR">Maximal heart rate</label>
+          <label htmlFor="maximalHR" className="form-label">
+            Maximal heart rate
+          </label>
           <input
             type="number"
             id="maximalHR"
             name="maximalHR"
             value={maximalHR}
             onChange={(e) => setMaximalHR(parseFloat(e.target.value))}
+            className="form-input"
           />
-          <button type="submit">Calculate</button>
+          <button type="submit" className="button-contained">
+            Calculate
+          </button>
         </form>
       </div>
-      <div>
-        <h3>Results</h3>
-        <table>
+      <div className="section-result">
+        <h3 className="section-result-subtitle">Results</h3>
+        <table className="section-results-table">
           <thead>
             <tr>
               <th>Zone</th>
