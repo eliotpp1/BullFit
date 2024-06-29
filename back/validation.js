@@ -1,10 +1,17 @@
 const Joi = require("joi");
 
-// Schéma de validation pour l'enregistrement d'utilisateur
 const signinValidation = (data) => {
   const schema = Joi.object({
-    username: Joi.string().min(6).required(),
-    password: Joi.string().min(8).required(),
+    username: Joi.string().min(6).max(255).required(),
+    password: Joi.string().min(8).max(1024).required(),
+    stats: Joi.object({
+      mas: Joi.number().required(),
+      fc65: Joi.number().required(),
+      fc75: Joi.number().required(),
+      fc85: Joi.number().required(),
+      fc95: Joi.number().required(),
+      fc100: Joi.number().required(),
+    }).required(),
   });
   return schema.validate(data);
 };

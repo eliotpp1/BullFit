@@ -4,14 +4,40 @@ const userSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true,
-    min: 6,
-    max: 255,
+    minlength: 6,
+    maxlength: 255,
   },
   password: {
     type: String,
     required: true,
-    min: 8,
-    max: 1024,
+    minlength: 8,
+    maxlength: 1024,
+  },
+  stats: {
+    mas: {
+      type: Number,
+      required: true,
+    },
+    fc65: {
+      type: Number,
+      required: true,
+    },
+    fc75: {
+      type: Number,
+      required: true,
+    },
+    fc85: {
+      type: Number,
+      required: true,
+    },
+    fc95: {
+      type: Number,
+      required: true,
+    },
+    fc100: {
+      type: Number,
+      required: true,
+    },
   },
   date: {
     type: Date,

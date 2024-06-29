@@ -21,21 +21,18 @@ router.post("/", async (req, res) => {
     username: req.body.username,
     password: hashedPassword,
     stats: {
-      speed: req.body.speed,
-      pace: req.body.pace,
-      calories: req.body.calories,
-      mas: req.body.mas,
-      fc65: req.body.fc65,
-      fc75: req.body.fc75,
-      fc85: req.body.fc85,
-      fc95: req.body.fc95,
-      fc100: req.body.fc100,
+      mas: req.body.stats.mas,
+      fc65: req.body.stats.fc65,
+      fc75: req.body.stats.fc75,
+      fc85: req.body.stats.fc85,
+      fc95: req.body.stats.fc95,
+      fc100: req.body.stats.fc100,
     },
   });
 
   try {
     const savedUser = await user.save();
-    res.send({ user: user._id });
+    res.send({ user: user._id, savedUser });
   } catch (err) {
     res.status(400).send(err);
   }

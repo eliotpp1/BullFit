@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom"; // Utilisez useNavigate pour la navigation
 
 const Calculator = () => {
   const [distance, setDistance] = useState(0);
@@ -22,6 +23,7 @@ const Calculator = () => {
   const [fc95, setFc95] = useState(0);
   const [fc100, setFc100] = useState(0);
   const [popup, setPopup] = useState(false);
+  const navigate = useNavigate(); // Utilisez useNavigate pour la navigation
 
   const onChangeDistance = (e) => {
     setDistance(parseFloat(e.target.value));
@@ -89,17 +91,6 @@ const Calculator = () => {
   };
 
   useEffect(() => {
-    localStorage.setItem("speed", 0);
-    localStorage.setItem("pace", 0);
-    localStorage.setItem("calories", 0);
-    localStorage.setItem("mas", 0);
-    localStorage.setItem("fc60", 0);
-    localStorage.setItem("fc65", 0);
-    localStorage.setItem("fc75", 0);
-    localStorage.setItem("fc85", 0);
-    localStorage.setItem("fc95", 0);
-    localStorage.setItem("fc100", 0);
-
     setSpeed(localStorage.getItem("speed") || 0);
     setPace(localStorage.getItem("pace") || 0);
     setCalories(localStorage.getItem("calories") || 0);
@@ -118,8 +109,9 @@ const Calculator = () => {
     if (parseFloat(pace) !== 0) counter++;
     if (parseFloat(calories) !== 0) counter++;
     if (parseFloat(mas) !== 0) counter++;
-    if (parseInt(fc60, 10) !== 0) counter++;
+    if (parseInt(fc60) !== 0) counter++;
     if (counter >= 4) popupSave();
+    console.log(counter);
   }, [speed, pace, calories, mas, fc60]);
 
   return (
@@ -133,10 +125,8 @@ const Calculator = () => {
         <div>
           <h2>Save your results</h2>
           <p>Do you want to save your results?</p>
-          <button onClick={() => (window.location.href = "/signin")}>
-            Sign In
-          </button>
-          <button onClick={popupSave}>No</button>
+          <button onClick={() => navigate("/signin")}>Sign In</button>
+          <button onClick={popupSave}>No thanks</button>
         </div>
       )}
 

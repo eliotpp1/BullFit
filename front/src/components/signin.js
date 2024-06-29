@@ -1,16 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom"; // Utilisez useNavigate pour la navigation
+import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const navigate = useNavigate(); // Utilisez useNavigate pour la navigation
-  const speed = localStorage.getItem("speed");
-  const pace = localStorage.getItem("pace");
-  const calories = localStorage.getItem("calories");
+  const navigate = useNavigate();
   const mas = localStorage.getItem("mas");
   const fc65 = localStorage.getItem("fc65");
   const fc75 = localStorage.getItem("fc75");
@@ -55,20 +52,24 @@ const SignIn = () => {
       const res = await axios.post("http://localhost:5000/signin", {
         username,
         password,
-        speed,
-        pace,
-        calories,
-        mas,
-        fc65,
-        fc75,
-        fc85,
-        fc95,
-        fc100,
+        stats: {
+          mas: parseFloat(mas), // Convertir en nombre
+          fc65: parseFloat(fc65),
+          fc75: parseFloat(fc75),
+          fc85: parseFloat(fc85),
+          fc95: parseFloat(fc95),
+          fc100: parseFloat(fc100),
+        },
       });
       console.log(res.data);
       navigate("/login");
     } catch (error) {
       console.error("Error adding user: ", error);
+      if (error.response) {
+        setErrorMessage(error.response.data);
+      } else {
+        setErrorMessage("An error occurred");
+      }
     }
 
     setUsername("");
@@ -122,7 +123,7 @@ const SignIn = () => {
           <input type="submit" value="Sign In" className="btn btn-primary" />
         </div>
       </form>
-      <Link to="/login">Log in</Link>
+      <button onClick={() => navigate("/login")}>Login</button>
     </div>
   );
 };
