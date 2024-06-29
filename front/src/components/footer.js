@@ -6,8 +6,8 @@ const Footer = () => {
   const navigate = useNavigate();
 
   return (
-    <footer>
-      <button onClick={() => navigate("/legal")}>
+    <footer className="footer">
+      <button onClick={() => navigate("/legal")} className="footer-button">
         © 2024 | BullFit | Legal informations
       </button>
     </footer>

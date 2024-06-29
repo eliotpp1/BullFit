@@ -45,12 +45,14 @@ h2,
 h4,
 h5,
 h6 {
+  font-family: "CeraBold", sans-serif;
   font-weight: $font-weight-bold;
   line-height: 1.2;
   margin: 0 0 1rem 0;
 }
 
 h1 {
+  font-family: "CeraBlack", sans-serif;
   font-size: $font-size-xlarge;
 }
 
@@ -68,4 +70,34 @@ p {
 
 small {
   font-size: $font-size-small;
+}
+
+li {
+  font-size: $font-size-base;
+  list-style: none;
+}
+a {
+  color: $main-blue;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+button {
+  font-family: "CeraMedium", sans-serif;
+  font-size: $font-size-base;
+  font-weight: $font-weight-bold;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: #fff;
+  background-color: $main-blue;
+  border: 1px solid $main-blue;
+  border-radius: 0.25rem;
+  padding: 0.375rem 0.75rem;
+  cursor: pointer;
+  &:hover {
+    background-color: $blue-light;
+    border-color: $blue-light;
+  }
 }

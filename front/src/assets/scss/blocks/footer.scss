@@ -1,0 +1,20 @@
+.footer {
+  text-align: center;
+  margin-top: 20px; /* Espacement en haut du footer */
+}
+
+.footer-button {
+  display: block;
+  margin: 0 auto; /* Centrage horizontal du bouton */
+  background-color: $blue-light; /* Couleur de fond du bouton */
+  color: #333; /* Couleur du texte */
+  border: none; /* Pas de bordure */
+  padding: 10px 20px; /* Remplissage intérieur */
+  cursor: pointer; /* Curseur de type pointeur */
+  font-size: 16px; /* Taille de police */
+  border-radius: 5px; /* Bordure arrondie */
+}
+
+.footer-button:hover {
+  background-color: $blue-light; /* Couleur de fond au survol */
+}

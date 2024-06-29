@@ -18,38 +18,54 @@ const Header = () => {
   };
 
   return (
-    <header>
-      <nav>
-        <ul>
-          <li>
-            <img src={Logo} alt="Bullfit logo" style={{ width: "30vw" }} />
+    <header className="header">
+      <nav className="nav">
+        <ul className="nav-list">
+          <li className="nav-item">
+            <img src={Logo} alt="Bullfit logo" className="logo" />
           </li>
-          <li>
-            <button onClick={() => navigate("/")}>Home</button>
+          <li className="nav-item">
+            <button onClick={() => navigate("/")} className="button-contained">
+              Home
+            </button>
           </li>
-          <li>
-            <button onClick={() => navigate("/test")}>Items</button>
+          <li className="nav-item">
+            <button
+              onClick={() => navigate("/test")}
+              className="button-contained"
+            >
+              Items
+            </button>
           </li>
-          <li>
+          <li className="nav-item">
             {connected ? (
-              <>
-                <button onClick={() => navigate("/dashboard")}>
-                  Dashboard
-                </button>
-              </>
+              <button
+                onClick={() => navigate("/dashboard")}
+                className="button-contained"
+              >
+                Dashboard
+              </button>
             ) : (
-              <button onClick={() => navigate("/calculator")}>
+              <button
+                onClick={() => navigate("/calculator")}
+                className="button-contained"
+              >
                 Calculator
               </button>
             )}
           </li>
-          <li>
+          <li className="nav-item">
             {connected ? (
-              <>
-                <button onClick={signOut}>Sign out</button>
-              </>
+              <button onClick={signOut} className="button-outlined">
+                Sign out
+              </button>
             ) : (
-              <button onClick={() => navigate("/login")}>Log in</button>
+              <button
+                onClick={() => navigate("/login")}
+                className="button-outlined"
+              >
+                Log in
+              </button>
             )}
           </li>
         </ul>
