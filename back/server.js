@@ -33,6 +33,15 @@ app.use("/signin", signinRouter);
 const loginRouter = require("./routes/login");
 app.use("/login", loginRouter);
 
+// Servir les fichiers statiques du client après build
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../front/build")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../front/build", "index.html"));
+  });
+}
+
 // Start server
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
