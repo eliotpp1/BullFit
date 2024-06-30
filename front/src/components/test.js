@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "./context/authcontext";
 
 const Test = () => {
   const [items, setItems] = useState([]);
@@ -9,14 +10,14 @@ const Test = () => {
   const [newUserName, setNewUserName] = useState("");
   const [newUserPassword, setNewUserPassword] = useState("");
   const navigate = useNavigate();
+  const { connected, signOut } = useContext(AuthContext);
 
   useEffect(() => {
-    // Vérifier si l'utilisateur est authentifié (a un jeton JWT valide)
-    const token = localStorage.getItem("token");
-    if (!token) {
-      navigate("/signin"); // Rediriger vers la page de connexion si aucun jeton n'est trouvé
+    if (!connected) {
+      navigate("/signin");
     } else {
-      // Charger les éléments et utilisateurs uniquement si l'utilisateur est authentifié
+      const token = localStorage.getItem("token");
+
       axios
         .get("http://localhost:5000/items", {
           headers: {
@@ -35,11 +36,21 @@ const Test = () => {
         .then((response) => setUsers(response.data))
         .catch((error) => console.error("Error fetching users: ", error));
     }
-  }, [navigate]);
+  }, [connected, navigate]);
 
   const addItem = () => {
+    const token = localStorage.getItem("token");
+
     axios
-      .post("http://localhost:5000/items/add", { name: newItem })
+      .post(
+        "http://localhost:5000/items/add",
+        { name: newItem },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then(() => {
         setItems([...items, { name: newItem }]);
         setNewItem("");
@@ -48,21 +59,27 @@ const Test = () => {
   };
 
   const addUser = () => {
+    const token = localStorage.getItem("token");
+
     axios
-      .post("http://localhost:5000/users/add", {
-        username: newUserName,
-        password: newUserPassword,
-      })
+      .post(
+        "http://localhost:5000/users/add",
+        {
+          username: newUserName,
+          password: newUserPassword,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then(() => {
         setUsers([...users, { username: newUserName }]);
         setNewUserName("");
         setNewUserPassword("");
       })
       .catch((error) => console.error("Error adding user: ", error));
-  };
-
-  const signIn = () => {
-    navigate("/signin");
   };
 
   return (
@@ -102,7 +119,7 @@ const Test = () => {
         />
         <button onClick={addUser}>Add User</button>
       </div>
-      <button onClick={signIn}>Sign In</button>
+      <button onClick={signOut}>Sign Out</button>
     </>
   );
 };
