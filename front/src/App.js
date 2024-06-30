@@ -7,20 +7,23 @@ import Login from "./components/login";
 import Header from "./components/header";
 import Footer from "./components/footer";
 import Calculator from "./components/calculator";
+import { AuthProvider } from "./components/context/authcontext";
 
 const App = () => {
   return (
-    <Router>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/test" element={<Test />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/calculator" element={<Calculator />} />
-      </Routes>
-      <Footer />
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/test" element={<Test />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/calculator" element={<Calculator />} />
+        </Routes>
+        <Footer />
+      </Router>
+    </AuthProvider>
   );
 };
 

@@ -26,69 +26,73 @@ const Home = () => {
           </div>
           <div className="home__line-vertical"></div>
           <div className="home__right">
-            <img src={MenRunning}></img>
+            <img alt="men running" src={MenRunning}></img>
           </div>
         </div>
       </section>
+      <div className="container">
+        <section className="running-calculator">
+          <h2 className="running-calculator__title">Running calculator</h2>
+          <p className="running-calculator__description">
+            With our running calculator, you can calculate your pace, your
+            speed, your distance or your time. You can also calculate your VO2
+            max and your BMI. You can also calculate your heart rate zones and
+            your calories burned.
+          </p>
+          <button
+            onClick={() => handleNavigation("/calculator")}
+            className="btn btn--calculate"
+          >
+            Calculate
+          </button>
+        </section>
 
-      <section className="running-calculator">
-        <h2 className="running-calculator__title">Running calculator</h2>
-        <p className="running-calculator__description">
-          With our running calculator, you can calculate your pace, your speed,
-          your distance or your time. You can also calculate your VO2 max and
-          your BMI. You can also calculate your heart rate zones and your
-          calories burned.
-        </p>
-        <button
-          onClick={() => handleNavigation("/calculator")}
-          className="btn btn--calculate"
-        >
-          Calculate
-        </button>
-      </section>
+        <section className="workouts-library">
+          <h2 className="workouts-library__title">Workouts library</h2>
+          <p className="workouts-library__description">
+            With our workouts library, you can find the best workouts for you.
+            You can find workouts for running, cycling, swimming, strength
+            training, yoga, pilates, stretching, meditation and more.
+          </p>
+          <button
+            onClick={() => handleNavigation("/")}
+            className="btn btn--find"
+          >
+            Find a workout
+          </button>
+        </section>
 
-      <section className="workouts-library">
-        <h2 className="workouts-library__title">Workouts library</h2>
-        <p className="workouts-library__description">
-          With our workouts library, you can find the best workouts for you. You
-          can find workouts for running, cycling, swimming, strength training,
-          yoga, pilates, stretching, meditation and more.
-        </p>
-        <button onClick={() => handleNavigation("/")} className="btn btn--find">
-          Find a workout
-        </button>
-      </section>
+        <section className="personal-workout">
+          <h2 className="personal-workout__title">Personal workout</h2>
+          <p className="personal-workout__description">
+            With our personal workout, you can create your own workout. You can
+            choose the type of workout, the duration, the intensity, the
+            difficulty and the equipment. You can also add your own exercises
+            and your own workouts.
+          </p>
+          <button
+            onClick={() => handleNavigation("/")}
+            className="btn btn--create"
+          >
+            Create a workout
+          </button>
+        </section>
 
-      <section className="personal-workout">
-        <h2 className="personal-workout__title">Personal workout</h2>
-        <p className="personal-workout__description">
-          With our personal workout, you can create your own workout. You can
-          choose the type of workout, the duration, the intensity, the
-          difficulty and the equipment. You can also add your own exercises and
-          your own workouts.
-        </p>
-        <button
-          onClick={() => handleNavigation("/")}
-          className="btn btn--create"
-        >
-          Create a workout
-        </button>
-      </section>
-
-      <section className="flow">
-        <h2 className="flow__title">Flow</h2>
-        <p className="flow__description">
-          With our flow, you can follow your workouts and your progress. You can
-          also follow your friends and your family. You can also share your
-          workouts and your progress with your friends and your family.
-        </p>
-        <button
-          onClick={() => handleNavigation("/")}
-          className="btn btn--follow"
-        >
-          Follow your flow
-        </button>
-      </section>
+        <section className="flow">
+          <h2 className="flow__title">Flow</h2>
+          <p className="flow__description">
+            With our flow, you can follow your workouts and your progress. You
+            can also follow your friends and your family. You can also share
+            your workouts and your progress with your friends and your family.
+          </p>
+          <button
+            onClick={() => handleNavigation("/")}
+            className="btn btn--follow"
+          >
+            Follow your flow
+          </button>
+        </section>
+      </div>
     </main>
   );
 };

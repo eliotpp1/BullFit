@@ -7,7 +7,7 @@ body {
 }
 
 main#main-content {
-  padding: 20px;
+  padding: 2rem;
 }
 
 /* Home section styles */
@@ -52,9 +52,19 @@ main#main-content {
 }
 
 /* Section styles */
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
 section {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
   text-align: center;
-  margin-bottom: 40px;
 }
 
 section h2 {
@@ -69,43 +79,60 @@ section p {
 }
 
 /* Button styles */
+/* Button Styles */
 .btn {
-  padding: 10px 20px;
-  font-size: 1em;
+  background-color: #007bff;
   color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
 }
 
+.btn:hover {
+  background-color: $bg-100;
+}
 .btn--calculate {
-  background-color: #007bff;
+  background-color: $bg-200;
 }
 
 .btn--calculate:hover {
-  background-color: #0056b3;
+  background-color: $bg-100;
 }
 
 .btn--find {
-  background-color: #28a745;
+  background-color: $bg-200;
 }
 
 .btn--find:hover {
-  background-color: #218838;
+  background-color: $bg-100;
 }
 
 .btn--create {
-  background-color: #ffc107;
+  background-color: $bg-200;
 }
 
 .btn--create:hover {
-  background-color: #e0a800;
+  background-color: $bg-100;
 }
 
 .btn--follow {
-  background-color: #17a2b8;
+  background-color: $bg-200;
 }
 
 .btn--follow:hover {
-  background-color: #138496;
+  background-color: $bg-100;
+}
+
+/* Responsive Typography */
+.running-calculator__title,
+.workouts-library__title,
+.personal-workout__title,
+.flow__title {
+  font-size: 1.5em;
+}
+
+.running-calculator__description,
+.workouts-library__description,
+.personal-workout__description,
+.flow__description {
+  font-size: 1em;
 }

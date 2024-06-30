@@ -1,21 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Logo from "../assets/images/logo_bullfit.webp";
+import { AuthContext } from "./context/authcontext";
 
 const Header = () => {
   const navigate = useNavigate();
-  const [connected, setConnected] = useState(false);
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    setConnected(!!token);
-  }, [connected]);
-
-  const signOut = () => {
-    localStorage.removeItem("token");
-    setConnected(false);
-    navigate("/signin");
-  };
+  const { connected, signOut } = useContext(AuthContext);
 
   return (
     <header className="header">

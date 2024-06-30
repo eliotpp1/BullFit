@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "./context/authcontext";
 
 const Login = () => {
-  const navigate = useNavigate(); // Utilisez useNavigate pour la navigation
+  const navigate = useNavigate();
+  const { signIn } = useContext(AuthContext);
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -27,45 +29,52 @@ const Login = () => {
 
     try {
       const response = await axios.post("http://localhost:5000/login", user);
-      localStorage.setItem("token", response.data); // Sauvegarder le jeton dans le stockage local
-      navigate("/test"); // Rediriger vers la page de test après connexion réussie
+      localStorage.setItem("token", response.data);
+      signIn();
+      navigate("/test");
     } catch (error) {
       setErrorMessage("Error signing in: " + error.response.data);
     }
   };
 
   return (
-    <div>
-      <h3>Log In</h3>
-      <form onSubmit={onSubmit}>
-        <div className="form-group">
-          <label>Username: </label>
+    <div className="login">
+      <h3 className="login__title">Log In</h3>
+      <form className="login__form" onSubmit={onSubmit}>
+        <div className="login__form-group">
+          <label className="login__label">Username:</label>
           <input
             type="text"
             required
-            className="form-control"
+            className="login__input"
             value={username}
             onChange={onChangeUsername}
           />
         </div>
-        <div className="form-group">
-          <label>Password: </label>
+        <div className="login__form-group">
+          <label className="login__label">Password:</label>
           <input
             type="password"
             required
-            className="form-control"
+            className="login__input"
             value={password}
             onChange={onChangePassword}
           />
         </div>
-        <div className="form-group">
-          <input type="submit" value="Log in" className="btn btn-primary" />
+        <div className="login__form-group">
+          <input
+            type="submit"
+            value="Log in"
+            className="login__btn login__btn--primary"
+          />
         </div>
-        <div className="form-group">
-          <Link to="/signup">Create an account</Link>
+        <div className="login__form-group">
+          <a className="login__link" href="/signin">
+            Create an account
+          </a>
         </div>
-        <div className="form-group">
-          <p>{errorMessage}</p>
+        <div className="login__form-group">
+          <p className="login__error-message">{errorMessage}</p>
         </div>
       </form>
     </div>
