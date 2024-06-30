@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 const { loginValidation } = require("./../validation");
 
 // Route de connexion
-router.post("/", async (req, res) => {
+router.post("/login", async (req, res) => {
   // Valider les données de l'utilisateur
   const { error } = loginValidation(req.body);
   if (error) return res.status(400).send(error.details[0].message);
@@ -23,6 +23,22 @@ router.post("/", async (req, res) => {
     expiresIn: "1h",
   });
   res.header("auth-token", token).send(token);
+});
+
+// Route pour vérifier le jeton
+router.get("/verify-token", async (req, res) => {
+  const token = req.header("Authorization").split(" ")[1];
+  if (!token) return res.status(401).send("Access Denied");
+
+  try {
+    const verified = jwt.verify(token, process.env.TOKEN_SECRET);
+    const user = await User.findById(verified._id);
+    if (!user) return res.status(400).send("User not found");
+
+    res.send({ valid: true, username: user.username });
+  } catch (error) {
+    res.status(400).send("Invalid Token");
+  }
 });
 
 module.exports = router;

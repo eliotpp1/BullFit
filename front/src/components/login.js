@@ -28,7 +28,10 @@ const Login = () => {
     };
 
     try {
-      const response = await axios.post("http://localhost:5000/login", user);
+      const response = await axios.post(
+        "http://localhost:5000/login/login",
+        user
+      );
       localStorage.setItem("token", response.data);
       signIn();
       navigate("/test");

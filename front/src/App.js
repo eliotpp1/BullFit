@@ -7,6 +7,7 @@ import Login from "./components/login";
 import Header from "./components/header";
 import Footer from "./components/footer";
 import Calculator from "./components/calculator";
+import Dashboard from "./components/dashboard";
 import { AuthProvider } from "./components/context/authcontext";
 
 const App = () => {
@@ -20,6 +21,7 @@ const App = () => {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/login" element={<Login />} />
           <Route path="/calculator" element={<Calculator />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
         <Footer />
       </Router>

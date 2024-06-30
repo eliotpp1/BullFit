@@ -79,35 +79,35 @@ const SignIn = () => {
   };
 
   return (
-    <div>
-      <h3>Sign In</h3>
-      <form onSubmit={onSubmit}>
-        <div className="form-group">
-          <label>Username: </label>
+    <div className="sign-in">
+      <h3 className="sign-in__title">Sign In</h3>
+      <form className="sign-in__form" onSubmit={onSubmit}>
+        <div className="sign-in__form-group">
+          <label className="sign-in__label">Username: </label>
           <input
             type="text"
             required
-            className="form-control"
+            className="sign-in__input"
             value={username}
             onChange={onChangeUsername}
           />
         </div>
-        <div className="form-group">
-          <label>Password: </label>
+        <div className="sign-in__form-group">
+          <label className="sign-in__label">Password: </label>
           <input
             type="password"
             required
-            className="form-control"
+            className="sign-in__input"
             value={password}
             onChange={onChangePassword}
           />
         </div>
-        <div className="form-group">
-          <label>Confirm Password: </label>
+        <div className="sign-in__form-group">
+          <label className="sign-in__label">Confirm Password: </label>
           <input
             type="password"
             required
-            className="form-control"
+            className="sign-in__input"
             value={confirmPassword}
             onChange={onChangeConfirmPassword}
           />
@@ -119,11 +119,17 @@ const SignIn = () => {
           </div>
         )}
 
-        <div className="form-group">
-          <input type="submit" value="Sign In" className="btn btn-primary" />
+        <div className="sign-in__form-group">
+          <input
+            type="submit"
+            value="Sign In"
+            className="btn btn-primary button-outlined"
+          />
         </div>
       </form>
-      <button onClick={() => navigate("/login")}>Login</button>
+      <button className="sign-in__login-btn" onClick={() => navigate("/login")}>
+        Login
+      </button>
     </div>
   );
 };

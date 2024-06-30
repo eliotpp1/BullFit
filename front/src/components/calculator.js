@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom"; // Utilisez useNavigate pour la navigation
+import { useNavigate } from "react-router-dom";
 
 const Calculator = () => {
   const [distance, setDistance] = useState(0);
@@ -23,7 +23,7 @@ const Calculator = () => {
   const [fc95, setFc95] = useState(0);
   const [fc100, setFc100] = useState(0);
   const [popup, setPopup] = useState(false);
-  const navigate = useNavigate(); // Utilisez useNavigate pour la navigation
+  const navigate = useNavigate();
 
   const onChangeDistance = (e) => {
     setDistance(parseFloat(e.target.value));
@@ -111,7 +111,6 @@ const Calculator = () => {
     if (parseFloat(mas) !== 0) counter++;
     if (parseInt(fc60) !== 0) counter++;
     if (counter >= 4) popupSave();
-    console.log(counter);
   }, [speed, pace, calories, mas, fc60]);
 
   return (

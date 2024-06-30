@@ -14,7 +14,7 @@ const Test = () => {
 
   useEffect(() => {
     if (!connected) {
-      navigate("/signin");
+      navigate("/login");
     } else {
       const token = localStorage.getItem("token");
 
@@ -86,6 +86,7 @@ const Test = () => {
     <>
       <div>
         <h1>Item List</h1>
+        <h1>{connected ? "toto" : "pas conecté"}</h1>
         <ul>
           {items.map((item, index) => (
             <li key={index}>{item.name}</li>
