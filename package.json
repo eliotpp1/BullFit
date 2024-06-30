@@ -1,0 +1,14 @@
+{
+  "name": "Bullfit - Fitness App",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node back/server.js",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix front && npm run build --prefix front"
+  },
+  "engines": {
+    "node": "14.x"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

@@ -1,0 +1,84 @@
+.button-contained-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: $blue-light;
+  color: #333;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  &:hover {
+    background-color: #e0e0e0;
+  }
+  svg {
+    margin-right: 0.5rem;
+  }
+}
+
+.button-contained {
+  padding: 0.5rem 1rem;
+  margin: 0 0.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: $blue-light;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  &:hover {
+    background-color: #e0e0e0;
+    color: #333;
+  }
+}
+
+.button-outlined {
+  padding: 0.5rem 1rem;
+  border: 2px solid $blue-light;
+  border-radius: 0.5rem;
+  background-color: transparent;
+  color: #4a9d9c;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  &:hover {
+    background-color: $blue-light;
+    color: #fff;
+  }
+}
+
+.button-text {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: transparent;
+  color: #4a9d9c;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  &:hover {
+    background-color: #e0e0e0;
+  }
+}
+
+.button-disabled {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: #e0e0e0;
+  color: #333;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.5;
+  cursor: not-allowed;
+}

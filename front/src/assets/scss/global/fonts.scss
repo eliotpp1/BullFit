@@ -1,0 +1,104 @@
+@font-face {
+  font-family: CeraBlack;
+  src: url("./../cera-pro/Cera-Pro-Black.woff") format("truetype");
+}
+
+@font-face {
+  font-family: CeraBold;
+  src: url("./../cera-pro/Cera-Pro-Bold.woff") format("truetype");
+}
+
+@font-face {
+  font-family: CeraMedium;
+  src: url("./../cera-pro/Cera-Pro-Medium.woff") format("truetype");
+}
+
+@font-face {
+  font-family: CeraRegular;
+  src: url("./../cera-pro/Cera-Pro-Regular.woff") format("truetype");
+}
+
+@font-face {
+  font-family: CeraThin;
+  src: url("./../cera-pro/Cera-Pro-Thin.woff") format("truetype");
+}
+
+$font-size-small: 0.875rem; // 14px
+$font-size-base: 1rem; // 16px
+$font-size-large: 1.25rem; // 20px
+$font-size-xlarge: 2rem; // 32px
+
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-bold: 700;
+
+body {
+  font-family: "CeraRegular", sans-serif;
+  font-size: $font-size-base;
+  font-weight: $font-weight-regular;
+  line-height: 1.5;
+  color: #333;
+}
+
+h1,
+h2,
+h4,
+h5,
+h6 {
+  font-family: "CeraBold", sans-serif;
+  font-weight: $font-weight-bold;
+  line-height: 1.2;
+  margin: 0 0 1rem 0;
+}
+
+h1 {
+  font-family: "CeraBlack", sans-serif;
+  font-size: $font-size-xlarge;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: $font-size-large;
+}
+
+p {
+  font-size: $font-size-base;
+  font-family: "CeraRegular", sans-serif;
+}
+
+small {
+  font-size: $font-size-small;
+}
+
+li {
+  font-size: $font-size-base;
+  list-style: none;
+}
+a {
+  color: $main-blue;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+button {
+  font-family: "CeraMedium", sans-serif;
+  font-size: $font-size-base;
+  font-weight: $font-weight-bold;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: #fff;
+  background-color: $main-blue;
+  border: 1px solid $main-blue;
+  border-radius: 0.25rem;
+  padding: 0.375rem 0.75rem;
+  cursor: pointer;
+  &:hover {
+    background-color: $blue-light;
+    border-color: $blue-light;
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/static/css/main.5462b5f7.css",
+    "main.js": "/static/js/main.6ad36c4c.js",
+    "static/js/453.80efc53e.chunk.js": "/static/js/453.80efc53e.chunk.js",
+    "static/media/Cera-Pro-Bold.woff": "/static/media/Cera-Pro-Bold.2c1e06e9125f199e804d.woff",
+    "static/media/Cera-Pro-Medium.woff": "/static/media/Cera-Pro-Medium.487c16ca64b6ec9f9f59.woff",
+    "static/media/Cera-Pro-Regular.woff": "/static/media/Cera-Pro-Regular.92bc25660d04ef3de67f.woff",
+    "static/media/Cera-Pro-Black.woff": "/static/media/Cera-Pro-Black.d6b7758b8a4b01462e36.woff",
+    "static/media/Cera-Pro-Thin.woff": "/static/media/Cera-Pro-Thin.1c649b0f6301642ee23b.woff",
+    "static/media/Fitness-stats-rafiki.webp": "/static/media/Fitness-stats-rafiki.be4b063f8dac537280a6.webp",
+    "static/media/logo_bullfit.webp": "/static/media/logo_bullfit.1b6919a1141137423bfc.webp",
+    "index.html": "/index.html",
+    "main.5462b5f7.css.map": "/static/css/main.5462b5f7.css.map",
+    "main.6ad36c4c.js.map": "/static/js/main.6ad36c4c.js.map",
+    "453.80efc53e.chunk.js.map": "/static/js/453.80efc53e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5462b5f7.css",
+    "static/js/main.6ad36c4c.js"
+  ]
+}

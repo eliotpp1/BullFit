@@ -1,0 +1,138 @@
+/* General styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+main#main-content {
+  padding: 2rem;
+}
+
+/* Home section styles */
+.home {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.home__title {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+}
+
+.home__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.home__left,
+.home__right {
+  flex: 1;
+  padding: 20px;
+}
+
+.home__description {
+  font-size: 1.2em;
+  color: #666;
+}
+
+.home__line-vertical {
+  width: 2px;
+  background-color: #ccc;
+  height: 300px;
+  margin: 0 20px;
+}
+
+.home__right img {
+  max-width: 100%;
+  height: 70vh;
+}
+
+/* Section styles */
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+section {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-align: center;
+}
+
+section h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+section p {
+  font-size: 1.2em;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* Button styles */
+/* Button Styles */
+.btn {
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: $bg-100;
+}
+.btn--calculate {
+  background-color: $bg-200;
+}
+
+.btn--calculate:hover {
+  background-color: $bg-100;
+}
+
+.btn--find {
+  background-color: $bg-200;
+}
+
+.btn--find:hover {
+  background-color: $bg-100;
+}
+
+.btn--create {
+  background-color: $bg-200;
+}
+
+.btn--create:hover {
+  background-color: $bg-100;
+}
+
+.btn--follow {
+  background-color: $bg-200;
+}
+
+.btn--follow:hover {
+  background-color: $bg-100;
+}
+
+/* Responsive Typography */
+.running-calculator__title,
+.workouts-library__title,
+.personal-workout__title,
+.flow__title {
+  font-size: 1.5em;
+}
+
+.running-calculator__description,
+.workouts-library__description,
+.personal-workout__description,
+.flow__description {
+  font-size: 1em;
+}
