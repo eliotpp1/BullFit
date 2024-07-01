@@ -4,99 +4,127 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Dashboard = () => {
-  const { username, connected } = useContext(AuthContext);
+  const { connected, username } = useContext(AuthContext);
   const navigate = useNavigate();
   const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [authChecked, setAuthChecked] = useState(false); // Ajout de l'état pour vérifier l'authentification
 
   useEffect(() => {
-    if (!connected) {
-      navigate("/login");
-    }
-  }, [connected, navigate]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      if (!username) return;
-      try {
-        const response = await axios.get(
-          `http://localhost:5000/users/getData?username=${username}`
-        );
-        setData(response.data);
-        console.log(response.data);
-      } catch (error) {
-        console.error(
-          "Erreur lors de la récupération des données du tableau de bord :",
-          error
-        );
+    const checkAuth = async () => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        navigate("/login");
+      } else {
+        try {
+          const response = await axios.get(
+            "http://localhost:5000/login/verify-token",
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          );
+          if (response.data.valid) {
+            setAuthChecked(true);
+          } else {
+            localStorage.removeItem("token");
+            navigate("/login");
+          }
+        } catch (error) {
+          console.error("Erreur de vérification du token :", error);
+          localStorage.removeItem("token");
+          navigate("/login");
+        }
       }
     };
 
-    fetchData();
+    checkAuth();
   }, []);
+
+  useEffect(() => {
+    if (authChecked) {
+      const fetchData = async () => {
+        try {
+          const token = localStorage.getItem("token");
+          const response = await axios.get(
+            `http://localhost:5000/users/getData?username=${username}`,
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          );
+          setData(response.data);
+        } catch (error) {
+          console.error(
+            "Erreur lors de la récupération des données du tableau de bord :",
+            error
+          );
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      fetchData();
+    }
+  }, [authChecked, username]);
+
+  if (loading) {
+    return <div>Chargement...</div>;
+  }
 
   return (
     <div className="dashboard">
       <h3 className="dashboard__title">Tableau de bord</h3>
       <p className="dashboard__text">Bienvenue, {username}!</p>
-      <p className="dashboard__text">Vos données :</p>
-      {data ? (
-        <ul className="dashboard__list">
-          <li className="dashboard__list-item">ID: {data._id}</li>
-          <li className="dashboard__list-item">
-            Nom d'utilisateur: {data.username}
-          </li>
-          <li className="dashboard__list-item">
-            Date de création: {new Date(data.date).toLocaleString()}
-          </li>
-          {data.stats && (
-            <>
-              <li className="dashboard__list-item">
-                Mas: {JSON.stringify(data.stats.mas)}
-              </li>
-              <li className="dashboard__list-item">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Zone</th>
-                      <th>Pourcentage</th>
-                      <th>Plage de fréquence cardiaque</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>60-65%</td>
-                      <td>{`${data.stats.fc60} - ${data.stats.fc65}`}</td>
-                    </tr>
-                    <tr>
-                      <td>2</td>
-                      <td>65-75%</td>
-                      <td>{`${data.stats.fc65} - ${data.stats.fc75}`}</td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>75-85%</td>
-                      <td>{`${data.stats.fc75} - ${data.stats.fc85}`}</td>
-                    </tr>
-                    <tr>
-                      <td>4</td>
-                      <td>85-95%</td>
-                      <td>{`${data.stats.fc85} - ${data.stats.fc95}`}</td>
-                    </tr>
-                    <tr>
-                      <td>5</td>
-                      <td>95-100%</td>
-                      <td>{`${data.stats.fc95} - ${data.stats.fc100}`}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </li>
-            </>
-          )}
-        </ul>
-      ) : (
-        <p className="dashboard__text">Aucune donnée disponible</p>
-      )}
+      <div className="dashboard__content">
+        {data && data.stats ? (
+          <div className="dashboard__side">
+            <div className="dashboard__list-item">
+              Mas: {JSON.stringify(data.stats.mas)}
+            </div>
+            <div className="dashboard__list-item">
+              <table className="dashboard__table">
+                <thead className="dashboard__table-head">
+                  <tr>
+                    <th className="dashboard__table-header">Zone</th>
+                    <th className="dashboard__table-header">Pourcentage</th>
+                    <th className="dashboard__table-header">
+                      Plage de fréquence cardiaque
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="dashboard__table-body">
+                  <tr className="dashboard__table-row">
+                    <td className="dashboard__table-cell">1</td>
+                    <td className="dashboard__table-cell">60-65%</td>
+                    <td className="dashboard__table-cell">{`${data.stats.fc60} - ${data.stats.fc65}`}</td>
+                  </tr>
+                  <tr className="dashboard__table-row">
+                    <td className="dashboard__table-cell">2</td>
+                    <td className="dashboard__table-cell">65-75%</td>
+                    <td className="dashboard__table-cell">{`${data.stats.fc65} - ${data.stats.fc75}`}</td>
+                  </tr>
+                  <tr className="dashboard__table-row">
+                    <td className="dashboard__table-cell">3</td>
+                    <td className="dashboard__table-cell">75-85%</td>
+                    <td className="dashboard__table-cell">{`${data.stats.fc75} - ${data.stats.fc85}`}</td>
+                  </tr>
+                  <tr className="dashboard__table-row">
+                    <td className="dashboard__table-cell">4</td>
+                    <td className="dashboard__table-cell">85-95%</td>
+                    <td className="dashboard__table-cell">{`${data.stats.fc85} - ${data.stats.fc95}`}</td>
+                  </tr>
+                  <tr className="dashboard__table-row">
+                    <td className="dashboard__table-cell">5</td>
+                    <td className="dashboard__table-cell">95-100%</td>
+                    <td className="dashboard__table-cell">{`${data.stats.fc95} - ${data.stats.fc100}`}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        ) : (
+          <p className="dashboard__text">Aucune donnée disponible</p>
+        )}
+      </div>
     </div>
   );
 };
