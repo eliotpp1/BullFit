@@ -21,10 +21,10 @@ const Header = () => {
           </li>
           <li className="nav-item">
             <button
-              onClick={() => navigate("/test")}
+              onClick={() => navigate("/activities")}
               className="button-contained"
             >
-              Items
+              Activities
             </button>
           </li>
           <li className="nav-item">
