@@ -2,6 +2,13 @@ import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "./context/authcontext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import {
+  FaRunning,
+  FaBiking,
+  FaSwimmer,
+  FaWalking,
+  FaHiking,
+} from "react-icons/fa";
 
 const STRAVA_CLIENT_ID = 120280;
 const STRAVA_CLIENT_SECRET = "7a74defbe9925602836ec5189ab127d0232a6922";
@@ -17,9 +24,6 @@ const Activities = () => {
 
   useEffect(() => {
     if (!connected) {
-      console.log(STRAVA_CLIENT_ID);
-      console.log(STRAVA_CLIENT_SECRET);
-      console.log(STRAVA_REDIRECT_URI);
     }
   }, [connected, navigate]);
 
@@ -61,6 +65,7 @@ const Activities = () => {
         }
       );
       setData(response.data);
+      console.log(response.data);
     } catch (err) {
       setError("Error fetching activities");
     } finally {
@@ -70,6 +75,34 @@ const Activities = () => {
 
   const handleConnectStrava = () => {
     window.location.href = STRAVA_AUTH_URL;
+  };
+
+  const getActivityIcon = (type) => {
+    switch (type) {
+      case "Run":
+        return <FaRunning />;
+      case "Ride":
+        return <FaBiking />;
+      case "Swim":
+        return <FaSwimmer />;
+      case "Walk":
+        return <FaWalking />;
+      case "Hike":
+        return <FaHiking />;
+      default:
+        return <FaRunning />; // Default icon if type is not matched
+    }
+  };
+
+  const formatPace = (distance, elapsedTime) => {
+    const distanceKm = distance / 1000;
+    const timeMin = elapsedTime / 60;
+    const paceMinPerKm = timeMin / distanceKm;
+
+    const minutes = Math.floor(paceMinPerKm);
+    const seconds = Math.round((paceMinPerKm - minutes) * 60);
+
+    return `${minutes}:${seconds < 10 ? "0" : ""}${seconds} /km`;
   };
 
   return (
@@ -85,7 +118,15 @@ const Activities = () => {
           <h2>Activities</h2>
           <ul>
             {data.map((activity) => (
-              <li key={activity.id}>{activity.name}</li>
+              <>
+                <li key={activity.id}>
+                  {getActivityIcon(activity.type)} {activity.name}
+                </li>
+                <li>{(activity.elapsed_time / 60).toFixed(0)} min</li>
+                <li>{activity.calories} kcal</li>
+                <li>{activity.average_heartrate} bpm</li>
+                <li>{formatPace(activity.distance, activity.moving_time)}</li>
+              </>
             ))}
           </ul>
         </div>
