@@ -13,14 +13,14 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// MongoDB connection
+// Connexion à MongoDB
 const uri = process.env.MONGO_URI; // Récupérer l'URI depuis les variables d'environnement
 mongoose
   .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.log(err));
 
-// Import routes
+// Importer les routes
 const itemsRouter = require("./routes/items");
 app.use("/items", itemsRouter);
 
@@ -33,16 +33,7 @@ app.use("/signin", signinRouter);
 const loginRouter = require("./routes/login");
 app.use("/login", loginRouter);
 
-// Servir les fichiers statiques du client après build
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../front/build")));
-
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../front/build", "index.html"));
-  });
-}
-
-// Start server
+// Démarrer le serveur
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
 });

@@ -10,11 +10,6 @@ import {
   FaHiking,
 } from "react-icons/fa";
 
-const STRAVA_CLIENT_ID = 120280;
-const STRAVA_CLIENT_SECRET = "7a74defbe9925602836ec5189ab127d0232a6922";
-const STRAVA_REDIRECT_URI = "http://localhost:3000/activities";
-const STRAVA_AUTH_URL = `https://www.strava.com/oauth/authorize?client_id=${STRAVA_CLIENT_ID}&response_type=code&redirect_uri=${STRAVA_REDIRECT_URI}&approval_prompt=force&scope=read,activity:read_all`;
-
 const Activities = () => {
   const { connected } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -24,8 +19,34 @@ const Activities = () => {
 
   useEffect(() => {
     if (!connected) {
+      console.log("Not connected");
     }
   }, [connected, navigate]);
+
+  const handleConnectStrava = () => {
+    window.location = "http://localhost:5000/users/auth";
+  };
+
+  const fetchActivities = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get(
+        "http://localhost:5000/users/activities",
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem(
+              "strava_access_token"
+            )}`,
+          },
+        }
+      );
+      setData(response.data);
+    } catch (err) {
+      setError("Error fetching activities");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -39,42 +60,16 @@ const Activities = () => {
   const exchangeToken = async (code) => {
     setLoading(true);
     try {
-      const response = await axios.post("https://www.strava.com/oauth/token", {
-        client_id: STRAVA_CLIENT_ID,
-        client_secret: STRAVA_CLIENT_SECRET,
-        code,
-        grant_type: "authorization_code",
-      });
+      const response = await axios.get(
+        `http://localhost:5000/users/auth/callback?code=${code}`
+      );
       const { access_token } = response.data;
       localStorage.setItem("strava_access_token", access_token);
-      fetchActivities(access_token);
+      fetchActivities();
     } catch (err) {
       setError("Error exchanging token");
       setLoading(false);
     }
-  };
-
-  const fetchActivities = async (accessToken) => {
-    try {
-      const response = await axios.get(
-        "https://www.strava.com/api/v3/athlete/activities",
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      );
-      setData(response.data);
-      console.log(response.data);
-    } catch (err) {
-      setError("Error fetching activities");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleConnectStrava = () => {
-    window.location.href = STRAVA_AUTH_URL;
   };
 
   const getActivityIcon = (type) => {
@@ -90,7 +85,7 @@ const Activities = () => {
       case "Hike":
         return <FaHiking />;
       default:
-        return <FaRunning />; // Default icon if type is not matched
+        return <FaRunning />; // Icone par défaut si le type n'est pas reconnu
     }
   };
 
@@ -106,7 +101,7 @@ const Activities = () => {
   };
 
   return (
-    <div>
+    <div className="dashboard-activities">
       <h1>Dashboard</h1>
       {!data && !loading && (
         <button onClick={handleConnectStrava}>Connect to Strava</button>
@@ -114,19 +109,46 @@ const Activities = () => {
       {loading && <p>Loading...</p>}
       {error && <p>{error}</p>}
       {data && (
-        <div>
+        <div className="activities">
           <h2>Activities</h2>
-          <ul>
+          <ul className="activity-list">
             {data.map((activity) => (
-              <>
-                <li key={activity.id}>
-                  {getActivityIcon(activity.type)} {activity.name}
-                </li>
-                <li>{(activity.elapsed_time / 60).toFixed(0)} min</li>
-                <li>{activity.calories} kcal</li>
-                <li>{activity.average_heartrate} bpm</li>
-                <li>{formatPace(activity.distance, activity.moving_time)}</li>
-              </>
+              <li key={activity.id} className="activity-card">
+                <div className="activity-header">
+                  <span className="activity-icon">
+                    {getActivityIcon(activity.type)}
+                  </span>
+                  <span className="activity-title">{activity.name}</span>
+                </div>
+                <div className="activity-body">
+                  <div className="activity-detail">
+                    <span className="activity-label">Date</span>
+                    <span>
+                      {new Date(activity.start_date).toLocaleDateString()}
+                    </span>
+                  </div>
+                  <div className="activity-detail">
+                    <span className="activity-label">Time</span>
+                    <span>{(activity.elapsed_time / 60).toFixed(0)} min</span>
+                  </div>
+                  <div className="activity-detail">
+                    <span className="activity-label">Distance</span>
+                    <span>{(activity.distance / 1000).toFixed(2)} km</span>
+                  </div>
+                  <div className="activity-detail">
+                    <span className="activity-label">Heart Rate</span>
+                    <span>{activity.average_heartrate} bpm</span>
+                  </div>
+                  {activity.type === "Run" && (
+                    <div className="activity-detail">
+                      <span className="activity-label">Pace</span>
+                      <span>
+                        {formatPace(activity.distance, activity.moving_time)}
+                      </span>
+                    </div>
+                  )}
+                </div>
+              </li>
             ))}
           </ul>
         </div>

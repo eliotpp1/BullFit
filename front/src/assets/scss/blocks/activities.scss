@@ -1,0 +1,91 @@
+.dashboard {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.activities {
+  margin-top: 20px;
+}
+
+.activity-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 0;
+  list-style: none;
+}
+
+.activity-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: calc(33.333% - 20px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  transition: transform 0.2s;
+}
+
+.activity-card:hover {
+  transform: scale(1.02);
+}
+
+.activity-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+}
+
+.activity-icon {
+  font-size: 2rem;
+}
+
+.activity-body {
+  margin-top: 1rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.activity-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 0.7rem;
+}
+
+.activity-detail span:nth-child(1) {
+  font-size: 0.7rem;
+}
+
+.activity-detail span:nth-child(2) {
+  font-weight: bold;
+  color: #555;
+}
+
+.activity-label {
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+}
+
+@media (max-width: 768px) {
+  .activity-card {
+    width: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 480px) {
+  .activity-card {
+    width: 100%;
+  }
+}
