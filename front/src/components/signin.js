@@ -9,6 +9,7 @@ const SignIn = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
   const mas = localStorage.getItem("mas");
+  const fc60 = localStorage.getItem("fc60");
   const fc65 = localStorage.getItem("fc65");
   const fc75 = localStorage.getItem("fc75");
   const fc85 = localStorage.getItem("fc85");
@@ -54,6 +55,7 @@ const SignIn = () => {
         password,
         stats: {
           mas: parseFloat(mas),
+          fc60: parseFloat(fc60),
           fc65: parseFloat(fc65),
           fc75: parseFloat(fc75),
           fc85: parseFloat(fc85),
