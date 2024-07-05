@@ -8,6 +8,8 @@ import {
   FaSwimmer,
   FaWalking,
   FaHiking,
+  FaWater,
+  FaDumbbell,
 } from "react-icons/fa";
 
 const Activities = () => {
@@ -53,6 +55,7 @@ const Activities = () => {
         }
       );
       setData(response.data);
+      console.log(response.data);
     } catch (err) {
       setError("Error fetching activities");
     } finally {
@@ -117,6 +120,11 @@ const Activities = () => {
         return <FaWalking />;
       case "Hike":
         return <FaHiking />;
+      case "Rowing":
+        return <FaWater />;
+      case "Workout":
+        return <FaDumbbell />;
+
       default:
         return <FaRunning />;
     }

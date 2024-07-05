@@ -28,6 +28,14 @@ const Header = () => {
             </button>
           </li>
           <li className="nav-item">
+            <button
+              onClick={() => navigate("/workouts")}
+              className="button-contained"
+            >
+              Workouts
+            </button>
+          </li>
+          <li className="nav-item">
             {connected ? (
               <button
                 onClick={() => navigate("/dashboard")}

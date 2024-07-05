@@ -110,14 +110,21 @@ const Calculator = () => {
     if (parseFloat(calories) !== 0) counter++;
     if (parseFloat(mas) !== 0) counter++;
     if (parseInt(fc60) !== 0) counter++;
-    if (counter >= 4) popupSave();
+    if (counter >= 4 && localStorage.getItem("popupShown") !== "true") {
+      popupSave();
+    }
   }, [speed, pace, calories, mas, fc60]);
+
+  const handlePopupClose = () => {
+    popupSave();
+    localStorage.setItem("popupShown", "true");
+  };
 
   return (
     <>
       <div className="header-calc">
         <h1 className="header-calc-title">Running Calculator</h1>
-        <p className="header-calc-subtitle">by BullFit</p>
+        <p className="header-ccalc-subtitle">by BullFit</p>
       </div>
 
       {popup && (
@@ -130,7 +137,7 @@ const Calculator = () => {
           >
             Sign In
           </button>
-          <button onClick={popupSave} className="button-contained">
+          <button onClick={handlePopupClose} className="button-contained">
             No thanks
           </button>
         </div>

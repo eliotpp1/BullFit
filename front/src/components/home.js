@@ -55,7 +55,7 @@ const Home = () => {
             training, yoga, pilates, stretching, meditation and more.
           </p>
           <button
-            onClick={() => handleNavigation("/")}
+            onClick={() => handleNavigation("/workouts")}
             className="btn btn--find"
           >
             Find a workout
@@ -71,7 +71,7 @@ const Home = () => {
             and your own workouts.
           </p>
           <button
-            onClick={() => handleNavigation("/")}
+            onClick={() => handleNavigation("/workouts")}
             className="btn btn--create"
           >
             Create a workout
@@ -86,7 +86,7 @@ const Home = () => {
             your workouts and your progress with your friends and your family.
           </p>
           <button
-            onClick={() => handleNavigation("/")}
+            onClick={() => handleNavigation("/activities")}
             className="btn btn--follow"
           >
             Follow your flow

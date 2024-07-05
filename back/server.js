@@ -33,6 +33,9 @@ app.use("/signin", signinRouter);
 const loginRouter = require("./routes/login");
 app.use("/login", loginRouter);
 
+const workoutsRouter = require("./routes/workouts");
+app.use("/workouts", workoutsRouter);
+
 // Démarrer le serveur
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);

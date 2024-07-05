@@ -22,6 +22,7 @@ router.post("/", async (req, res) => {
     password: hashedPassword,
     stats: {
       mas: req.body.stats.mas,
+      fc60: req.body.stats.fc60,
       fc65: req.body.stats.fc65,
       fc75: req.body.stats.fc75,
       fc85: req.body.stats.fc85,

@@ -1,6 +1,6 @@
-.dashboard {
+.dashboard-activities {
   max-width: 1200px;
-  margin: 0 auto;
+  margin: auto auto;
   padding: 20px;
 }
 
@@ -31,6 +31,7 @@
 
 .activity-card:hover {
   transform: scale(1.02);
+  border: 2px solid black;
 }
 
 .activity-header {

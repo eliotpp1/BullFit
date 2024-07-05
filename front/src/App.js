@@ -9,24 +9,35 @@ import Footer from "./components/footer";
 import Calculator from "./components/calculator";
 import Dashboard from "./components/dashboard";
 import Activities from "./components/activities";
+import Workouts from "./components/workouts/workouts";
+import WorkoutsCreate from "./components/workouts/workoutsCreate";
+import WorkoutsFind from "./components/workouts/workoutsFind";
 import { AuthProvider } from "./components/context/authcontext";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 const App = () => {
   return (
     <AuthProvider>
-      <Router>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/test" element={<Test />} />
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/calculator" element={<Calculator />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/activities" element={<Activities />} />
-        </Routes>
-        <Footer />
-      </Router>
+      <QueryClientProvider client={queryClient}>
+        <Router>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/test" element={<Test />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/calculator" element={<Calculator />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/activities" element={<Activities />} />
+            <Route path="/workouts" element={<Workouts />} />
+            <Route path="/workouts/create" element={<WorkoutsCreate />} />
+            <Route path="/workouts/find" element={<WorkoutsFind />} />
+          </Routes>
+          <Footer />
+        </Router>
+      </QueryClientProvider>
     </AuthProvider>
   );
 };

@@ -18,6 +18,10 @@ const userSchema = new mongoose.Schema({
       type: Number,
       required: true,
     },
+    fc60: {
+      type: Number,
+      required: true,
+    },
     fc65: {
       type: Number,
       required: true,
