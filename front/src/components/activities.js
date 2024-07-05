@@ -20,6 +20,20 @@ const Activities = () => {
   useEffect(() => {
     if (!connected) {
       console.log("Not connected");
+    } else {
+      const accessToken = localStorage.getItem("strava_access_token");
+      const refreshToken = localStorage.getItem("strava_refresh_token");
+      const expiresAt = localStorage.getItem("strava_expires_at");
+
+      if (accessToken && refreshToken && expiresAt) {
+        if (new Date().getTime() / 1000 > expiresAt) {
+          refreshAccessToken(refreshToken);
+        } else {
+          fetchActivities(accessToken);
+        }
+      } else {
+        handleConnectStrava();
+      }
     }
   }, [connected, navigate]);
 
@@ -27,16 +41,14 @@ const Activities = () => {
     window.location = "http://localhost:5000/users/auth";
   };
 
-  const fetchActivities = async () => {
+  const fetchActivities = async (accessToken) => {
     setLoading(true);
     try {
       const response = await axios.get(
         "http://localhost:5000/users/activities",
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem(
-              "strava_access_token"
-            )}`,
+            Authorization: `Bearer ${accessToken}`,
           },
         }
       );
@@ -63,11 +75,32 @@ const Activities = () => {
       const response = await axios.get(
         `http://localhost:5000/users/auth/callback?code=${code}`
       );
-      const { access_token } = response.data;
+      const { access_token, refresh_token, expires_at } = response.data;
       localStorage.setItem("strava_access_token", access_token);
-      fetchActivities();
+      localStorage.setItem("strava_refresh_token", refresh_token);
+      localStorage.setItem("strava_expires_at", expires_at);
+      fetchActivities(access_token);
     } catch (err) {
       setError("Error exchanging token");
+      setLoading(false);
+    }
+  };
+
+  const refreshAccessToken = async (refreshToken) => {
+    try {
+      const response = await axios.post("https://www.strava.com/oauth/token", {
+        client_id: process.env.REACT_APP_STRAVA_CLIENT_ID,
+        client_secret: process.env.REACT_APP_STRAVA_CLIENT_SECRET,
+        grant_type: "refresh_token",
+        refresh_token: refreshToken,
+      });
+      const { access_token, refresh_token, expires_at } = response.data;
+      localStorage.setItem("strava_access_token", access_token);
+      localStorage.setItem("strava_refresh_token", refresh_token);
+      localStorage.setItem("strava_expires_at", expires_at);
+      fetchActivities(access_token);
+    } catch (err) {
+      setError("Error refreshing access token");
       setLoading(false);
     }
   };
@@ -85,7 +118,7 @@ const Activities = () => {
       case "Hike":
         return <FaHiking />;
       default:
-        return <FaRunning />; // Icone par défaut si le type n'est pas reconnu
+        return <FaRunning />;
     }
   };
 
@@ -107,7 +140,6 @@ const Activities = () => {
         <button onClick={handleConnectStrava}>Connect to Strava</button>
       )}
       {loading && <p>Loading...</p>}
-      {error && <p>{error}</p>}
       {data && (
         <div className="activities">
           <h2>Activities</h2>

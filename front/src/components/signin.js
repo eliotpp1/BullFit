@@ -53,7 +53,7 @@ const SignIn = () => {
         username,
         password,
         stats: {
-          mas: parseFloat(mas), // Convertir en nombre
+          mas: parseFloat(mas),
           fc65: parseFloat(fc65),
           fc75: parseFloat(fc75),
           fc85: parseFloat(fc85),

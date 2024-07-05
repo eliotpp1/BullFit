@@ -71,11 +71,10 @@ router.get("/auth/callback", async (req, res) => {
       grant_type: "authorization_code",
     });
 
-    const { access_token } = response.data;
+    const { access_token, refresh_token, expires_at } = response.data;
 
-    // Stocker access_token dans la session ou la base de données associée à l'utilisateur
-
-    res.json({ access_token });
+    // Stocker les tokens dans une base de données ou une session sécurisée
+    res.json({ access_token, refresh_token, expires_at });
   } catch (err) {
     console.error("Error exchanging code for access token:", err);
     res.status(500).json({ error: "Failed to authenticate with Strava" });
