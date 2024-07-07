@@ -55,7 +55,6 @@ const Activities = () => {
         }
       );
       setData(response.data);
-      console.log(response.data);
     } catch (err) {
       setError("Error fetching activities");
     } finally {

@@ -12,8 +12,9 @@ import Activities from "./components/activities";
 import Workouts from "./components/workouts/workouts";
 import WorkoutsCreate from "./components/workouts/workoutsCreate";
 import WorkoutsFind from "./components/workouts/workoutsFind";
+import WorkoutDetails from "./components/workouts/workoutDetail";
 import { AuthProvider } from "./components/context/authcontext";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +35,7 @@ const App = () => {
             <Route path="/workouts" element={<Workouts />} />
             <Route path="/workouts/create" element={<WorkoutsCreate />} />
             <Route path="/workouts/find" element={<WorkoutsFind />} />
+            <Route path="/workouts/:id" element={<WorkoutDetails />} />
           </Routes>
           <Footer />
         </Router>

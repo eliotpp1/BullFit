@@ -1,0 +1,88 @@
+.main-content {
+  padding: 20px;
+}
+
+/* WorkoutsFind component styles */
+.workouts-find {
+  max-width: 800px;
+  margin: auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.workouts-find__title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+}
+
+.workouts-find__form {
+  margin-bottom: 20px;
+}
+
+.workouts-find__input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.workouts-find__container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-gap: 20px;
+}
+
+.workouts-find__workout {
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid $bg-100;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.workouts-find__workout-title {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.workouts-find__workout-description {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.btn {
+  display: inline-block;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.workouts-find__warning {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .workouts-find__container {
+    grid-template-columns: 1fr;
+  }
+}

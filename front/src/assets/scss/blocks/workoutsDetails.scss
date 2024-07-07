@@ -1,0 +1,103 @@
+#main-content {
+  padding: 20px;
+}
+
+.workout-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.workout-details__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.workout-details__title {
+  font-size: 2rem;
+  margin: 0;
+  text-align: center;
+}
+
+.workout_details__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10rem;
+}
+
+.workout-details__description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.workout-details__info {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.workout-details__info-item {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+}
+
+.workout-details__info-label {
+  font-weight: bold;
+}
+
+.workout-details__info-icon {
+  margin-left: 0.5rem;
+}
+
+.workout-details__info-icons {
+  display: flex;
+  align-items: center;
+}
+
+.btn--back {
+  margin-right: 8px;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Pour une meilleure réactivité mobile */
+
+@media (max-width: 768px) {
+  .workout-details {
+    padding: 15px;
+  }
+
+  .workout-details__title {
+    font-size: 1.5rem;
+  }
+
+  .workout-details__description {
+    font-size: 1rem;
+  }
+
+  .workout-details__info {
+    flex-direction: column;
+  }
+
+  .btn--back {
+    margin-top: 20px;
+  }
+}

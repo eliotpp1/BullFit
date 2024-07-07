@@ -21,6 +21,7 @@ const WorkoutsCreate = () => {
 
   const handleChange = (e) => {
     setWorkout({ ...workout, [e.target.name]: e.target.value });
+    console.log(workout);
   };
 
   const mutation = useMutation(
@@ -74,7 +75,7 @@ const WorkoutsCreate = () => {
             required
           />
           <label htmlFor="duration" className="workouts-create__label">
-            Duration
+            Duration (min)
           </label>
           <input
             type="number"
@@ -88,15 +89,14 @@ const WorkoutsCreate = () => {
           <label htmlFor="description" className="workouts-create__label">
             Description
           </label>
-          <input
-            type="text"
+          <textarea
             id="description"
             name="description"
             value={workout.description}
             onChange={handleChange}
-            className="workouts-create__input"
+            className="workouts-create__textarea"
             required
-          />
+          ></textarea>
           <label htmlFor="sport" className="workouts-create__label">
             Sport
           </label>
@@ -148,7 +148,18 @@ const WorkoutsCreate = () => {
             <option value="intermediate">Intermediate</option>
             <option value="advanced">Advanced</option>
           </select>
-          <button type="submit" className="btn btn--create">
+          {!connected && (
+            <p className="workouts-find__warning">
+              You must be connected to create a workout
+            </p>
+          )}
+          <button
+            type="submit"
+            className={`button-contained ${
+              !connected ? "button-disabled" : ""
+            }`}
+            disabled={!connected}
+          >
             Create
           </button>
         </form>

@@ -1,6 +1,6 @@
 // component for either find a workout or create a workout
 
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { AuthContext } from "../context/authcontext";
 import { useNavigate } from "react-router-dom";
 
@@ -28,13 +28,13 @@ const Workouts = () => {
           <div className="workouts__right">
             <button
               onClick={() => navigate("/workouts/find")}
-              className="btn btn--find"
+              className="button-contained"
             >
               Find a workout
             </button>
             <button
               onClick={() => navigate("/workouts/create")}
-              className="btn btn--create"
+              className="button-contained"
             >
               Create a workout
             </button>

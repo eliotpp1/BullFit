@@ -6,7 +6,21 @@ const Workout = require("../models/Workout");
 router.get("/find", (req, res) => {
   Workout.find()
     .then((workouts) => res.json(workouts))
-    .catch((err) => res.status(400).json("Error: " + err));
+    .catch((err) => res.status(400).json({ error: err.message }));
+});
+
+// GET workout details by ID
+router.get("/details/:id", (req, res) => {
+  const workoutId = req.params.id;
+
+  Workout.findById(workoutId)
+    .then((workout) => {
+      if (!workout) {
+        return res.status(404).json({ error: "Workout not found" });
+      }
+      res.json(workout);
+    })
+    .catch((err) => res.status(400).json({ error: err.message }));
 });
 
 // POST a new workout
@@ -27,7 +41,7 @@ router.post("/create", (req, res) => {
   newWorkout
     .save()
     .then(() => res.json("Workout added!"))
-    .catch((err) => res.status(400).json("Error: " + err));
+    .catch((err) => res.status(400).json({ error: err.message }));
 });
 
 module.exports = router;
