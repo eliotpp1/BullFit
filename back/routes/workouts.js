@@ -11,15 +11,17 @@ router.get("/find", (req, res) => {
 
 // POST a new workout
 router.post("/create", (req, res) => {
-  const newWorkout = new Item({
-    name: req.body.name,
-    duration: req.body.duration,
-    date: req.body.date,
-    description: req.body.description,
-    sport: req.body.sport,
-    intensity: req.body.intensity,
-    difficulty: req.body.difficulty,
-    author: req.body.author,
+  const { name, duration, description, sport, intensity, difficulty, author } =
+    req.body;
+
+  const newWorkout = new Workout({
+    name,
+    duration,
+    description,
+    sport,
+    intensity,
+    difficulty,
+    author,
   });
 
   newWorkout

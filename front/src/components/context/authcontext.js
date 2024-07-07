@@ -5,7 +5,7 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [connected, setConnected] = useState(false);
-  const [username, setUsername] = useState("");
+  const [user, setUser] = useState({});
 
   useEffect(() => {
     const checkToken = async () => {
@@ -19,8 +19,8 @@ export const AuthProvider = ({ children }) => {
             }
           );
           if (response.data.valid) {
-            console.log("Token verified", response.data.username);
-            setUsername(response.data.username);
+            console.log("Token verified", response.data.user.name);
+            setUser(response.data.user);
             setConnected(true);
           } else {
             localStorage.removeItem("token");
@@ -45,7 +45,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ connected, signIn, signOut, username }}>
+    <AuthContext.Provider value={{ connected, signIn, signOut, user }}>
       {children}
     </AuthContext.Provider>
   );

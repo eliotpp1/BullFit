@@ -5,7 +5,7 @@ const workoutSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
-    minlength: 6,
+    minlength: 3,
     maxlength: 255,
   },
   duration: {

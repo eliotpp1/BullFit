@@ -35,7 +35,7 @@ router.get("/verify-token", async (req, res) => {
     const user = await User.findById(verified._id);
     if (!user) return res.status(400).send("User not found");
 
-    res.send({ valid: true, username: user.username });
+    res.send({ valid: true, user: user });
   } catch (error) {
     res.status(400).send("Invalid Token");
   }
