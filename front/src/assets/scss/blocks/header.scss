@@ -5,10 +5,6 @@
   min-height: 10vh;
 }
 
-.nav {
-  /* Styles pour la navigation */
-}
-
 .nav-list {
   list-style: none;
   display: flex;
@@ -24,4 +20,5 @@
 
 .logo {
   width: 5vw;
+  cursor: pointer;
 }

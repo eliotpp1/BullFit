@@ -3,6 +3,7 @@ import { useQuery } from "react-query";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/authcontext";
+import { FaArrowLeft } from "react-icons/fa";
 
 const WorkoutsFind = () => {
   const navigate = useNavigate();
@@ -54,6 +55,12 @@ const WorkoutsFind = () => {
   return (
     <main id="main-content">
       <section className="workouts-find">
+        <button
+          onClick={() => navigate("/workouts")}
+          className="workouts-find__button"
+        >
+          <FaArrowLeft />
+        </button>
         <h1 className="workouts-find__title">Find a workout</h1>
         <form className="workouts-find__form">
           <input

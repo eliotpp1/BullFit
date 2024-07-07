@@ -12,7 +12,12 @@ const Header = () => {
       <nav className="nav">
         <ul className="nav-list">
           <li className="nav-item">
-            <img src={Logo} alt="Bullfit logo" className="logo" />
+            <img
+              src={Logo}
+              alt="Bullfit logo"
+              className="logo"
+              onClick={() => navigate("/")}
+            />
           </li>
           <li className="nav-item">
             <button onClick={() => navigate("/")} className="button-contained">

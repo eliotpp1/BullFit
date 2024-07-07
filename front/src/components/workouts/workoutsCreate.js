@@ -1,12 +1,12 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/authcontext";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
+import { FaArrowLeft } from "react-icons/fa";
 
 const WorkoutsCreate = () => {
   const { connected, user } = useContext(AuthContext);
   const navigate = useNavigate();
-  console.log(user);
 
   const [workout, setWorkout] = useState({
     name: "",
@@ -16,12 +16,25 @@ const WorkoutsCreate = () => {
     sport: "running",
     intensity: "low",
     difficulty: "beginner",
-    author: user ? user._id : "", // Utilisation de l'ID utilisateur
+    author: "",
   });
+
+  const [notification, setNotification] = useState("");
+
+  useEffect(() => {
+    if (user) {
+      setWorkout((prevWorkout) => ({ ...prevWorkout, author: user._id }));
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (notification) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [notification]);
 
   const handleChange = (e) => {
     setWorkout({ ...workout, [e.target.name]: e.target.value });
-    console.log(workout);
   };
 
   const mutation = useMutation(
@@ -43,7 +56,11 @@ const WorkoutsCreate = () => {
     },
     {
       onSuccess: () => {
-        navigate("/workouts");
+        setNotification("Votre workout a été créé avec succès !");
+        setTimeout(() => {
+          setNotification("");
+          navigate("/workouts/find");
+        }, 3000);
       },
     }
   );
@@ -60,7 +77,14 @@ const WorkoutsCreate = () => {
   return (
     <main id="main-content">
       <section className="workouts-create">
+        <button
+          onClick={() => navigate("/workouts")}
+          className="workouts-find__button"
+        >
+          <FaArrowLeft />
+        </button>
         <h1 className="workouts-create__name">Create a workout</h1>
+        {notification && <p className="notification">{notification}</p>}
         <form onSubmit={handleSubmit} className="workouts-create__form">
           <label htmlFor="name" className="workouts-create__label">
             Name

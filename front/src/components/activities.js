@@ -123,7 +123,6 @@ const Activities = () => {
         return <FaWater />;
       case "Workout":
         return <FaDumbbell />;
-
       default:
         return <FaRunning />;
     }
@@ -142,9 +141,20 @@ const Activities = () => {
 
   return (
     <div className="dashboard-activities">
-      <h1>Dashboard</h1>
+      <h1>Your activities</h1>
       {!data && !loading && (
-        <button onClick={handleConnectStrava}>Connect to Strava</button>
+        <button
+          onClick={handleConnectStrava}
+          className={`button-contained ${!connected ? "button-disabled" : ""}`}
+          disabled={!connected}
+        >
+          Connect to Strava
+        </button>
+      )}
+      {!connected && (
+        <p className="workouts-find__warning">
+          You must be connected to create a workout
+        </p>
       )}
       {loading && <p>Loading...</p>}
       {data && (

@@ -10,6 +10,7 @@
   background-color: #f9f9f9;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
 }
 
 /* Title of the create workout section */
@@ -42,32 +43,6 @@
   font-size: 1em;
   width: 100%;
   box-sizing: border-box;
-}
-
-/* Button to submit the form */
-.btn {
-  background-color: #007bff;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1em;
-  transition: background-color 0.3s ease;
-  text-align: center;
-}
-
-.btn:hover {
-  background-color: #0056b3;
-}
-
-/* Specific button for creating a workout */
-.btn--create {
-  background-color: #28a745;
-}
-
-.btn--create:hover {
-  background-color: #218838;
 }
 
 /* Responsive adjustments */

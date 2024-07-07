@@ -99,6 +99,12 @@ const WorkoutDetails = () => {
   return (
     <main id="main-content">
       <section className="workout-details">
+        <button
+          onClick={() => navigate("/workouts")}
+          className="workouts-find__button"
+        >
+          <FaArrowLeft />
+        </button>
         <div className="workout-details__header">
           <h1 className="workout-details__title">{data.name}</h1>
         </div>
@@ -146,13 +152,6 @@ const WorkoutDetails = () => {
             </div>
           </div>
         </div>
-        <button
-          onClick={handleNavigateBack}
-          className="button-contained btn--back"
-        >
-          <FaArrowLeft />
-          Back to Workouts
-        </button>
       </section>
     </main>
   );

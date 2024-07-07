@@ -10,6 +10,21 @@
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.workouts-find__button {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+}
+
+.workouts-find__button:hover {
+  color: $bg-300;
 }
 
 .workouts-find__title {
@@ -57,19 +72,6 @@
   font-size: 14px;
   color: #666;
   margin-bottom: 10px;
-}
-
-.btn {
-  display: inline-block;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  border-radius: 4px;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
 }
 
 .workouts-find__warning {

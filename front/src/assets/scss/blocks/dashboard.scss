@@ -1,0 +1,97 @@
+/* Container Styling */
+.dashboard {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: "Arial", sans-serif;
+  color: #333;
+}
+
+/* Title Styling */
+.dashboard__title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* Text Styling */
+.dashboard__text {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* List Styling */
+.dashboard__list {
+  list-style: none;
+  padding: 0;
+}
+
+/* List Item Styling */
+.dashboard__list-item {
+  background: #f9f9f9;
+  margin: 10px 0;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 1rem;
+}
+
+/* Table Styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+th {
+  background-color: #f4f4f4;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 768px) {
+  .dashboard__title {
+    font-size: 1.5rem;
+  }
+
+  .dashboard__text {
+    font-size: 1rem;
+  }
+
+  .dashboard__list-item {
+    font-size: 0.9rem;
+  }
+
+  th,
+  td {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard__title {
+    font-size: 1.2rem;
+  }
+
+  .dashboard__text {
+    font-size: 0.9rem;
+  }
+
+  .dashboard__list-item {
+    font-size: 0.8rem;
+    padding: 10px;
+  }
+
+  th,
+  td {
+    font-size: 0.8rem;
+    padding: 5px;
+  }
+}

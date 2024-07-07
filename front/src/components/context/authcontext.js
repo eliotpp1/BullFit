@@ -5,7 +5,7 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [connected, setConnected] = useState(false);
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const checkToken = async () => {
@@ -42,6 +42,7 @@ export const AuthProvider = ({ children }) => {
   const signOut = () => {
     localStorage.removeItem("token");
     setConnected(false);
+    setUser(null);
   };
 
   return (
