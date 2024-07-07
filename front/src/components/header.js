@@ -1,3 +1,4 @@
+// Header.jsx
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Logo from "../assets/images/logo_bullfit.webp";
@@ -6,6 +7,12 @@ import { AuthContext } from "./context/authcontext";
 const Header = () => {
   const navigate = useNavigate();
   const { connected, signOut } = useContext(AuthContext);
+
+  const handleSignOut = () => {
+    localStorage.removeItem("token");
+    signOut(); // Appel à la fonction signOut du contexte
+    navigate("/");
+  };
 
   return (
     <header className="header">
@@ -59,7 +66,7 @@ const Header = () => {
           </li>
           <li className="nav-item">
             {connected ? (
-              <button onClick={signOut} className="button-outlined">
+              <button onClick={handleSignOut} className="button-outlined">
                 Sign out
               </button>
             ) : (

@@ -1,3 +1,4 @@
+// authcontext.jsx
 import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
 
@@ -39,14 +40,16 @@ export const AuthProvider = ({ children }) => {
     setConnected(true);
   };
 
-  const signOut = () => {
-    localStorage.removeItem("token");
+  const handleSignOut = () => {
+    // Mettez à jour l'état connected lors de la déconnexion
     setConnected(false);
     setUser(null);
   };
 
   return (
-    <AuthContext.Provider value={{ connected, signIn, signOut, user }}>
+    <AuthContext.Provider
+      value={{ connected, signIn, signOut: handleSignOut, user }}
+    >
       {children}
     </AuthContext.Provider>
   );

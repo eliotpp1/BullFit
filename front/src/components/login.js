@@ -34,7 +34,7 @@ const Login = () => {
       );
       localStorage.setItem("token", response.data);
       signIn();
-      navigate("/test");
+      navigate("/dashboard");
     } catch (error) {
       setErrorMessage("Error signing in: " + error.response.data);
     }
