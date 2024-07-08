@@ -1,11 +1,17 @@
-.header {
+/* PC Header */
+.header-pc {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 10vh;
 }
 
-.nav-list {
+.pc-nav {
+  display: flex;
+  justify-content: space-around;
+}
+
+.pc-nav-list {
   list-style: none;
   display: flex;
   align-items: center;
@@ -14,11 +20,81 @@
   gap: 2rem;
 }
 
-.nav-item {
+.pc-nav-item {
   margin-right: 20px; /* Ajustez selon vos besoins */
 }
 
-.logo {
+.pc-logo {
   width: 5vw;
   cursor: pointer;
+}
+
+/* Mobile Header */
+.mobile-header {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+  border-top: 1px solid #e0e0e0;
+  z-index: 1000;
+}
+
+.mobile-nav {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+}
+
+.mobile-nav-list {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.mobile-nav-item {
+  flex: 1;
+  text-align: center;
+}
+
+.mobile-logo {
+  width: 40px;
+  height: auto;
+  margin-top: 0.4rem;
+}
+
+.mobile-button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #333;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.mobile-button:focus {
+  outline: none;
+}
+
+/* Media query pour les téléphones et tablettes */
+@media (max-width: 1000px) {
+  .header-pc {
+    display: none; /* Cacher le menu PC */
+  }
+
+  .mobile-header {
+    display: block; /* Afficher le menu mobile */
+  }
+}
+
+@media (min-width: 1001px) {
+  .mobile-header {
+    display: none; /* Cacher le menu mobile sur les grands écrans */
+  }
 }

@@ -8,13 +8,19 @@ const SignIn = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
-  const mas = localStorage.getItem("mas");
-  const fc60 = localStorage.getItem("fc60");
-  const fc65 = localStorage.getItem("fc65");
-  const fc75 = localStorage.getItem("fc75");
-  const fc85 = localStorage.getItem("fc85");
-  const fc95 = localStorage.getItem("fc95");
-  const fc100 = localStorage.getItem("fc100");
+
+  const getLocalStorageItem = (key, defaultValue) => {
+    const value = localStorage.getItem(key);
+    return value !== null ? parseFloat(value) : defaultValue;
+  };
+
+  const mas = getLocalStorageItem("mas", 0);
+  const fc60 = getLocalStorageItem("fc60", 0);
+  const fc65 = getLocalStorageItem("fc65", 0);
+  const fc75 = getLocalStorageItem("fc75", 0);
+  const fc85 = getLocalStorageItem("fc85", 0);
+  const fc95 = getLocalStorageItem("fc95", 0);
+  const fc100 = getLocalStorageItem("fc100", 0);
 
   const onChangeUsername = (e) => {
     setUsername(e.target.value.trim());
@@ -54,13 +60,13 @@ const SignIn = () => {
         username,
         password,
         stats: {
-          mas: parseFloat(mas),
-          fc60: parseFloat(fc60),
-          fc65: parseFloat(fc65),
-          fc75: parseFloat(fc75),
-          fc85: parseFloat(fc85),
-          fc95: parseFloat(fc95),
-          fc100: parseFloat(fc100),
+          mas,
+          fc60,
+          fc65,
+          fc75,
+          fc85,
+          fc95,
+          fc100,
         },
       });
       console.log(res.data);

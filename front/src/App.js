@@ -4,6 +4,7 @@ import Home from "./components/home";
 import SignIn from "./components/signin";
 import Login from "./components/login";
 import Header from "./components/header";
+import HeaderMobile from "./components/headerMobile";
 import Footer from "./components/footer";
 import Calculator from "./components/calculator";
 import Dashboard from "./components/dashboard";
@@ -23,6 +24,7 @@ const App = () => {
       <QueryClientProvider client={queryClient}>
         <Router>
           <Header />
+          <HeaderMobile />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/signin" element={<SignIn />} />

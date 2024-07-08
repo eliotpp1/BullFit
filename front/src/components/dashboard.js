@@ -8,20 +8,36 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const [userData, setUserData] = useState({});
   const [username, setUsername] = useState("");
-  console.log(user);
+  const [loadingContext, setLoadingContext] = useState(true);
 
   useEffect(() => {
-    if (!connected) {
-      console.log("You are not connected, redirecting to login page");
-      navigate("/login"); // Redirect to login if not connected
-    } else if (user) {
-      setUsername(user.username);
-    }
-  }, [connected, navigate, user]);
+    const checkAuth = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:5000/login/verify-token",
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        if (response.data.valid) {
+          setLoadingContext(false);
+          setUsername(response.data.user.username);
+        } else {
+          navigate("/login");
+        }
+      } catch (error) {
+        console.error("Erreur lors de la vérification du jeton :", error);
+        navigate("/login");
+      }
+    };
+    checkAuth();
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
-      if (!username) return;
+      if (username) return;
       try {
         const response = await axios.get(
           `http://localhost:5000/users/getData?username=${username}`
@@ -38,6 +54,10 @@ const Dashboard = () => {
 
     fetchData();
   }, [username]);
+
+  if (loadingContext) {
+    return <p>Chargement...</p>; // Optionally, show a loading indicator while context is being loaded
+  }
 
   return (
     <div className="dashboard">

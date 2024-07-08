@@ -1,4 +1,3 @@
-// Header.jsx
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Logo from "../assets/images/logo_bullfit.webp";
@@ -15,31 +14,31 @@ const Header = () => {
   };
 
   return (
-    <header className="header">
-      <nav className="nav">
-        <ul className="nav-list">
-          <li className="nav-item">
+    <header className="header-pc">
+      <nav className="pc-nav">
+        <ul className="pc-nav-list">
+          <li className="pc-nav-item">
             <img
               src={Logo}
               alt="Bullfit logo"
-              className="logo"
+              className="pc-logo"
               onClick={() => navigate("/")}
             />
           </li>
-          <li className="nav-item">
-            <button onClick={() => navigate("/")} className="button-contained">
+          <li className="pc-nav-item">
+            <button onClick={() => navigate("/")} className=" button-contained">
               Home
             </button>
           </li>
-          <li className="nav-item">
+          <li className="pc-nav-item">
             <button
               onClick={() => navigate("/activities")}
-              className="button-contained"
+              className=" button-contained"
             >
               Activities
             </button>
           </li>
-          <li className="nav-item">
+          <li className="pc-nav-item">
             <button
               onClick={() => navigate("/workouts")}
               className="button-contained"
@@ -47,7 +46,7 @@ const Header = () => {
               Workouts
             </button>
           </li>
-          <li className="nav-item">
+          <li className="pc-nav-item">
             {connected ? (
               <button
                 onClick={() => navigate("/dashboard")}
@@ -58,13 +57,13 @@ const Header = () => {
             ) : (
               <button
                 onClick={() => navigate("/calculator")}
-                className="button-contained"
+                className=" button-contained"
               >
                 Calculator
               </button>
             )}
           </li>
-          <li className="nav-item">
+          <li className="pc-nav-item">
             {connected ? (
               <button onClick={handleSignOut} className="button-outlined">
                 Sign out

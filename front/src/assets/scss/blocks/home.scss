@@ -44,11 +44,12 @@ main#main-content {
   background-color: #ccc;
   height: 300px;
   margin: 0 20px;
+  display: none; /* Hide by default for smaller screens */
 }
 
 .home__right img {
   max-width: 100%;
-  height: 70vh;
+  height: auto; /* Adjust to maintain aspect ratio */
 }
 
 /* Section styles */
@@ -78,60 +79,58 @@ section p {
   margin-bottom: 20px;
 }
 
-/* Button styles */
-/* Button Styles */
 .btn {
-  color: #fff;
+  padding: 10px 20px;
+  border: none;
   border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.btn--calculate,
+.btn--find,
+.btn--create,
+.btn--follow {
+  background-color: $bg-200;
+  color: white;
   transition: background-color 0.3s;
 }
 
 .btn:hover {
-  background-color: $bg-100;
-}
-.btn--calculate {
-  background-color: $bg-200;
+  background-color: $bg-300;
 }
 
-.btn--calculate:hover {
-  background-color: $bg-100;
-}
+/* Responsive styles */
+@media (max-width: 768px) {
+  .home__container {
+    flex-direction: column;
+  }
 
-.btn--find {
-  background-color: $bg-200;
-}
+  .home__line-vertical {
+    display: none; /* Hide the vertical line on small screens */
+  }
 
-.btn--find:hover {
-  background-color: $bg-100;
-}
+  .home__description {
+    font-size: 1em;
+  }
 
-.btn--create {
-  background-color: $bg-200;
-}
+  .home__title {
+    font-size: 2em;
+  }
 
-.btn--create:hover {
-  background-color: $bg-100;
-}
+  section h2 {
+    font-size: 1.5em;
+  }
 
-.btn--follow {
-  background-color: $bg-200;
-}
+  section p {
+    font-size: 1em;
+  }
 
-.btn--follow:hover {
-  background-color: $bg-100;
-}
+  .btn {
+    font-size: 0.9em;
+  }
 
-/* Responsive Typography */
-.running-calculator__title,
-.workouts-library__title,
-.personal-workout__title,
-.flow__title {
-  font-size: 1.5em;
-}
-
-.running-calculator__description,
-.workouts-library__description,
-.personal-workout__description,
-.flow__description {
-  font-size: 1em;
+  .home__right img {
+    height: auto; /* Maintain aspect ratio for smaller screens */
+  }
 }

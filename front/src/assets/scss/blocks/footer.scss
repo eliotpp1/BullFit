@@ -18,3 +18,10 @@
 .footer-button:hover {
   background-color: $blue-light;
 }
+
+/* Hide the mobile header on larger screens */
+@media (max-width: 769px) {
+  .footer {
+    display: none;
+  }
+}
