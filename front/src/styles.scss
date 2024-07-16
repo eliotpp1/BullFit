@@ -15,3 +15,7 @@
 @import "./assets/scss/blocks/workoutsFind.scss";
 @import "./assets/scss/blocks/workoutsDetails.scss";
 @import "./assets/scss/blocks/workoutsCreate.scss";
+
+body {
+  scroll-behavior: smooth !important;
+}

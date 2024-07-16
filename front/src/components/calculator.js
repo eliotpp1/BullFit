@@ -9,11 +9,14 @@ const Calculator = () => {
   const [speed, setSpeed] = useState(0);
   const [pace, setPace] = useState(0);
   const [weight, setWeight] = useState(0);
+  const [weight2, setWeight2] = useState(0);
+  const [height, setHeight] = useState(0);
   const [distance2, setDistance2] = useState(0);
   const [calories, setCalories] = useState(0);
   const [distance3, setDistance3] = useState(0);
   const [restingHR, setRestingHR] = useState(0);
   const [maximalHR, setMaximalHR] = useState(0);
+  const [bmi, setBmi] = useState(0);
   const [mas, setMas] = useState(0);
   const [fc60, setFc60] = useState(0);
   const [fc65, setFc65] = useState(0);
@@ -85,6 +88,13 @@ const Calculator = () => {
     }
   };
 
+  const calculateBMI = (event) => {
+    event.preventDefault();
+    const bmi = weight2 / Math.pow(height / 100, 2);
+    setBmi(bmi.toFixed(2));
+    localStorage.setItem("bmi", bmi.toFixed(2));
+  };
+
   const popupSave = () => {
     setPopup(!popup);
   };
@@ -94,6 +104,7 @@ const Calculator = () => {
     setPace(localStorage.getItem("pace") || 0);
     setCalories(localStorage.getItem("calories") || 0);
     setMas(localStorage.getItem("mas") || 0);
+    setBmi(localStorage.getItem("bmi") || 0);
     setFc60(localStorage.getItem("fc60") || 0);
     setFc65(localStorage.getItem("fc65") || 0);
     setFc75(localStorage.getItem("fc75") || 0);
@@ -156,6 +167,9 @@ const Calculator = () => {
           </li>
           <li>
             <a href="#hrz">Calculate your heart rate zones</a>
+          </li>
+          <li>
+            <a href="#bmi">Calculate your BMI</a>
           </li>
         </ul>
       </nav>
@@ -363,6 +377,43 @@ const Calculator = () => {
             </tr>
           </tbody>
         </table>
+      </div>
+      <div id="bmi" className="section">
+        <h2 className="section-title">Calculate your BMI (Body Mass Index)</h2>
+        <p className="section-description">
+          The Body Mass Index (BMI) is a measure of body fat based on height and
+        </p>
+        <form onSubmit={calculateBMI} className="form">
+          <label htmlFor="weight2" className="form-label">
+            Weight (in kg)
+          </label>
+          <input
+            type="number"
+            id="weight2"
+            name="weight2"
+            value={weight2}
+            onChange={(e) => setWeight2(parseFloat(e.target.value))}
+            className="form-input"
+          />
+          <label htmlFor="height" className="form-label">
+            Height (in cm)
+          </label>
+          <input
+            type="number"
+            id="height"
+            name="height"
+            value={height}
+            onChange={(e) => setHeight(parseFloat(e.target.value))}
+            className="form-input"
+          />
+          <button type="submit" className="button-contained">
+            Calculate
+          </button>
+        </form>
+      </div>
+      <div className="section-result">
+        <h3 className="section-result-subtitle">Results</h3>
+        <p>BMI: {bmi}</p>
       </div>
     </>
   );

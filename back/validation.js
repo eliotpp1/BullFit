@@ -5,6 +5,7 @@ const signinValidation = (data) => {
     username: Joi.string().min(6).max(255).required(),
     password: Joi.string().min(8).max(1024).required(),
     stats: Joi.object({
+      bmi: Joi.number().required(),
       mas: Joi.number().required(),
       fc60: Joi.number().required(),
       fc65: Joi.number().required(),

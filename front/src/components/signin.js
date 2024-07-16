@@ -15,6 +15,7 @@ const SignIn = () => {
   };
 
   const mas = getLocalStorageItem("mas", 0);
+  const bmi = getLocalStorageItem("bmi", 0);
   const fc60 = getLocalStorageItem("fc60", 0);
   const fc65 = getLocalStorageItem("fc65", 0);
   const fc75 = getLocalStorageItem("fc75", 0);
@@ -60,6 +61,7 @@ const SignIn = () => {
         username,
         password,
         stats: {
+          bmi,
           mas,
           fc60,
           fc65,

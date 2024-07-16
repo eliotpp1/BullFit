@@ -14,6 +14,10 @@ const userSchema = new mongoose.Schema({
     maxlength: 1024,
   },
   stats: {
+    bmi: {
+      type: Number,
+      required: true,
+    },
     mas: {
       type: Number,
       required: true,

@@ -21,6 +21,7 @@ router.post("/", async (req, res) => {
     username: req.body.username,
     password: hashedPassword,
     stats: {
+      bmi: req.body.stats.bmi,
       mas: req.body.stats.mas,
       fc60: req.body.stats.fc60,
       fc65: req.body.stats.fc65,
