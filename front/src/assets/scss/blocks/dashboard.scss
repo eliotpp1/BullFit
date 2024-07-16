@@ -55,6 +55,12 @@ th {
   background-color: #f4f4f4;
 }
 
+@media (max-width: 1000px) {
+  .dashboard {
+    margin-top: 50%;
+  }
+}
+
 /* Responsive Media Queries */
 @media (max-width: 768px) {
   .dashboard__title {

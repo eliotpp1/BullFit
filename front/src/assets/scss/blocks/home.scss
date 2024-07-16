@@ -1,13 +1,6 @@
-/* General styles */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 main#main-content {
   padding: 2rem;
+  margin-bottom: 15vh;
 }
 
 /* Home section styles */
@@ -98,6 +91,12 @@ section p {
 
 .btn:hover {
   background-color: $bg-300;
+}
+
+@media (max-width: 1000px) {
+  .workouts {
+    margin-top: 50%;
+  }
 }
 
 /* Responsive styles */

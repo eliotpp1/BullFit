@@ -100,7 +100,7 @@ const WorkoutDetails = () => {
     <main id="main-content">
       <section className="workout-details">
         <button
-          onClick={() => navigate("/workouts")}
+          onClick={() => navigate("/workouts/find")}
           className="workouts-find__button"
         >
           <FaArrowLeft />

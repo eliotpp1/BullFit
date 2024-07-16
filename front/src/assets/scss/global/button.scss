@@ -79,3 +79,26 @@
   line-height: 1.5;
   cursor: not-allowed;
 }
+
+@media screen and (max-width: 768px) {
+  .button-contained-icons {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.7rem;
+  }
+  .button-contained {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.7rem;
+  }
+  .button-outlined {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.7rem;
+  }
+  .button-text {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.7rem;
+  }
+  .button-disabled {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.7rem;
+  }
+}

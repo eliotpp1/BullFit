@@ -11,8 +11,7 @@ const Calculator = () => {
   const [weight, setWeight] = useState(0);
   const [distance2, setDistance2] = useState(0);
   const [calories, setCalories] = useState(0);
-  const [weight2, setWeight2] = useState(0);
-  const [height, setHeight] = useState(0);
+  const [distance3, setDistance3] = useState(0);
   const [restingHR, setRestingHR] = useState(0);
   const [maximalHR, setMaximalHR] = useState(0);
   const [mas, setMas] = useState(0);
@@ -49,7 +48,7 @@ const Calculator = () => {
 
   const calculateMAS = (event) => {
     event.preventDefault();
-    const mas = weight2 / ((height / 100) * (height / 100));
+    const mas = distance3 / 100;
     setMas(mas.toFixed(2));
     localStorage.setItem("mas", mas.toFixed(2));
   };
@@ -124,7 +123,7 @@ const Calculator = () => {
     <>
       <div className="header-calc">
         <h1 className="header-calc-title">Running Calculator</h1>
-        <p className="header-ccalc-subtitle">by BullFit</p>
+        <p className="header-calc-subtitle">by BullFit</p>
       </div>
 
       {popup && (
@@ -143,7 +142,25 @@ const Calculator = () => {
         </div>
       )}
 
-      <div className="section">
+      <nav className="toc">
+        <h2>Contents</h2>
+        <ul>
+          <li>
+            <a href="#avg-speed-pace">Average speed and pace calculator</a>
+          </li>
+          <li>
+            <a href="#calories">Calories burned during race</a>
+          </li>
+          <li>
+            <a href="#mas">Calculate your MAS</a>
+          </li>
+          <li>
+            <a href="#hrz">Calculate your heart rate zones</a>
+          </li>
+        </ul>
+      </nav>
+
+      <div id="avg-speed-pace" className="section">
         <h2 className="section-title">Average speed and pace calculator</h2>
         <form onSubmit={calculateAvgSpeed} className="form">
           <label htmlFor="distance" className="form-label">
@@ -202,7 +219,7 @@ const Calculator = () => {
         <p>Pace: {pace} min/km</p>
       </div>
 
-      <div className="section">
+      <div id="calories" className="section">
         <h2 className="section-title">Calories burned during race</h2>
         <form onSubmit={calculateCalories} className="form">
           <label htmlFor="weight" className="form-label">
@@ -237,29 +254,25 @@ const Calculator = () => {
         <p>Calories burned: {calories}</p>
       </div>
 
-      <div className="section">
+      <div id="mas" className="section">
         <h2 className="section-title">Calculate your MAS</h2>
+        <p className="section-description">
+          The maximal aerobic speed (MAS) is the lowest running speed at which
+          VO2max is reached. It is a good indicator of your running performance.
+          The half-Cooper test is a field test used to assess Maximum Aerobic
+          Speed (MAS). The aim is to cover the greatest possible distance in 6
+          minutes.
+        </p>
         <form onSubmit={calculateMAS} className="form">
-          <label htmlFor="weight2" className="form-label">
-            Weight (in kg)
+          <label htmlFor="distance3" className="form-label">
+            Max distance in 6 minutes (in meters)
           </label>
           <input
             type="number"
-            id="weight2"
-            name="weight2"
-            value={weight2}
-            onChange={(e) => setWeight2(parseFloat(e.target.value))}
-            className="form-input"
-          />
-          <label htmlFor="height" className="form-label">
-            Height (in cm)
-          </label>
-          <input
-            type="number"
-            id="height"
-            name="height"
-            value={height}
-            onChange={(e) => setHeight(parseFloat(e.target.value))}
+            id="distance3"
+            name="distance3"
+            value={distance3}
+            onChange={(e) => setDistance3(parseFloat(e.target.value))}
             className="form-input"
           />
           <button type="submit" className="button-contained">
@@ -272,7 +285,7 @@ const Calculator = () => {
         <p>MAS: {mas}</p>
       </div>
 
-      <div className="section">
+      <div id="hrz" className="section">
         <h2 className="section-title">Calculate your heart rate zones</h2>
         <form onSubmit={calculateHRZ} className="form">
           <label htmlFor="restingHR" className="form-label">
