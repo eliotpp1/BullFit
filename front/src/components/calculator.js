@@ -382,6 +382,7 @@ const Calculator = () => {
         <h2 className="section-title">Calculate your BMI (Body Mass Index)</h2>
         <p className="section-description">
           The Body Mass Index (BMI) is a measure of body fat based on height and
+          weight.
         </p>
         <form onSubmit={calculateBMI} className="form">
           <label htmlFor="weight2" className="form-label">

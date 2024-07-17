@@ -1,12 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
-import { AuthContext } from "./context/authcontext";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Dashboard = () => {
-  const { connected, user } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState(null);
   const [username, setUsername] = useState("");
   const [loadingContext, setLoadingContext] = useState(true);
 
@@ -22,8 +20,8 @@ const Dashboard = () => {
           }
         );
         if (response.data.valid) {
-          setLoadingContext(false);
           setUsername(response.data.user.username);
+          setLoadingContext(false);
         } else {
           navigate("/login");
         }
@@ -33,17 +31,17 @@ const Dashboard = () => {
       }
     };
     checkAuth();
-  }, []);
+  }, [navigate]);
 
   useEffect(() => {
+    if (!username) return;
+
     const fetchData = async () => {
-      if (username) return;
       try {
         const response = await axios.get(
           `http://localhost:5000/users/getData?username=${username}`
         );
-        setUserData(response.data.user); // Assuming the response contains a user object
-        console.log(response.data.user);
+        setUserData(response.data);
       } catch (error) {
         console.error(
           "Erreur lors de la récupération des données du tableau de bord :",
@@ -56,69 +54,72 @@ const Dashboard = () => {
   }, [username]);
 
   if (loadingContext) {
-    return <p>Chargement...</p>; // Optionally, show a loading indicator while context is being loaded
+    return <p>Chargement...</p>;
   }
 
   return (
     <div className="dashboard">
       <h3 className="dashboard__title">Tableau de bord</h3>
-      <p className="dashboard__text">Bienvenue, {user.username}!</p>
-      <p className="dashboard__text">Vos données :</p>
-      {user ? (
-        <ul className="dashboard__list">
-          <li className="dashboard__list-item">ID: {user._id}</li>
-          <li className="dashboard__list-item">
-            Nom d'utilisateur: {user.username}
-          </li>
-          <li className="dashboard__list-item">
-            Date de création: {new Date(user.date).toLocaleString()}
-          </li>
-          {user.stats && (
-            <>
-              <li className="dashboard__list-item">
-                Mas: {JSON.stringify(user.stats.mas)}
-              </li>
-              <li className="dashboard__list-item">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Zone</th>
-                      <th>Pourcentage</th>
-                      <th>Plage de fréquence cardiaque</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>60-65%</td>
-                      <td>{`${user.stats.fc60} - ${user.stats.fc65}`}</td>
-                    </tr>
-                    <tr>
-                      <td>2</td>
-                      <td>65-75%</td>
-                      <td>{`${user.stats.fc65} - ${user.stats.fc75}`}</td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>75-85%</td>
-                      <td>{`${user.stats.fc75} - ${user.stats.fc85}`}</td>
-                    </tr>
-                    <tr>
-                      <td>4</td>
-                      <td>85-95%</td>
-                      <td>{`${user.stats.fc85} - ${user.stats.fc95}`}</td>
-                    </tr>
-                    <tr>
-                      <td>5</td>
-                      <td>95-100%</td>
-                      <td>{`${user.stats.fc95} - ${user.stats.fc100}`}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </li>
-            </>
-          )}
-        </ul>
+      {userData ? (
+        <>
+          <p className="dashboard__text">Bienvenue, {userData.username}!</p>
+          <p className="dashboard__text">Vos données :</p>
+          <ul className="dashboard__list">
+            <li className="dashboard__list-item">ID: {userData._id}</li>
+            <li className="dashboard__list-item">
+              Nom d'utilisateur: {userData.username}
+            </li>
+            <li className="dashboard__list-item">
+              Date de création: {new Date(userData.date).toLocaleString()}
+            </li>
+            <li className="dashboard__list-item">BMI: {userData.stats.bmi}</li>
+            {userData.stats && (
+              <>
+                <li className="dashboard__list-item">
+                  Mas: {JSON.stringify(userData.stats.mas)}
+                </li>
+                <li className="dashboard__list-item">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Zone</th>
+                        <th>Pourcentage</th>
+                        <th>Plage de fréquence cardiaque</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>1</td>
+                        <td>60-65%</td>
+                        <td>{`${userData.stats.fc60} - ${userData.stats.fc65}`}</td>
+                      </tr>
+                      <tr>
+                        <td>2</td>
+                        <td>65-75%</td>
+                        <td>{`${userData.stats.fc65} - ${userData.stats.fc75}`}</td>
+                      </tr>
+                      <tr>
+                        <td>3</td>
+                        <td>75-85%</td>
+                        <td>{`${userData.stats.fc75} - ${userData.stats.fc85}`}</td>
+                      </tr>
+                      <tr>
+                        <td>4</td>
+                        <td>85-95%</td>
+                        <td>{`${userData.stats.fc85} - ${userData.stats.fc95}`}</td>
+                      </tr>
+                      <tr>
+                        <td>5</td>
+                        <td>95-100%</td>
+                        <td>{`${userData.stats.fc95} - ${userData.stats.fc100}`}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </li>
+              </>
+            )}
+          </ul>
+        </>
       ) : (
         <p className="dashboard__text">Aucune donnée disponible</p>
       )}
