@@ -10,6 +10,7 @@ import {
   FaHiking,
   FaWater,
   FaDumbbell,
+  FaCheck,
 } from "react-icons/fa";
 
 const Activities = () => {
@@ -55,6 +56,7 @@ const Activities = () => {
         }
       );
       setData(response.data);
+      console.log(response.data);
     } catch (err) {
       setError("Error fetching activities");
     } finally {
@@ -84,6 +86,7 @@ const Activities = () => {
       fetchActivities(access_token);
     } catch (err) {
       setError("Error exchanging token");
+    } finally {
       setLoading(false);
     }
   };
@@ -103,6 +106,7 @@ const Activities = () => {
       fetchActivities(access_token);
     } catch (err) {
       setError("Error refreshing access token");
+    } finally {
       setLoading(false);
     }
   };
@@ -158,50 +162,124 @@ const Activities = () => {
       )}
       {loading && <p>Loading...</p>}
       {data && (
-        <div className="activities">
-          <h2>Activities</h2>
-          <ul className="activity-list">
-            {data.map((activity) => (
-              <li key={activity.id} className="activity-card">
-                <div className="activity-header">
-                  <span className="activity-icon">
-                    {getActivityIcon(activity.type)}
-                  </span>
-                  <span className="activity-title">{activity.name}</span>
-                </div>
-                <div className="activity-body">
-                  <div className="activity-detail">
-                    <span className="activity-label">Date</span>
-                    <span>
-                      {new Date(activity.start_date).toLocaleDateString()}
+        <>
+          <div className="activities">
+            <h2>Activities</h2>
+            <ul className="activity-list">
+              {data.map((activity) => (
+                <li key={activity.id} className="activity-card">
+                  <div className="activity-header">
+                    <span className="activity-icon">
+                      {getActivityIcon(activity.type)}
                     </span>
+                    <span className="activity-title">{activity.name}</span>
                   </div>
-                  <div className="activity-detail">
-                    <span className="activity-label">Time</span>
-                    <span>{(activity.elapsed_time / 60).toFixed(0)} min</span>
-                  </div>
-                  <div className="activity-detail">
-                    <span className="activity-label">Distance</span>
-                    <span>{(activity.distance / 1000).toFixed(2)} km</span>
-                  </div>
-                  <div className="activity-detail">
-                    <span className="activity-label">Heart Rate</span>
-                    <span>{activity.average_heartrate} bpm</span>
-                  </div>
-                  {activity.type === "Run" && (
+                  <div className="activity-body">
                     <div className="activity-detail">
-                      <span className="activity-label">Pace</span>
+                      <span className="activity-label">Date</span>
                       <span>
-                        {formatPace(activity.distance, activity.moving_time)}
+                        {new Date(activity.start_date).toLocaleDateString()}
                       </span>
                     </div>
-                  )}
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
+                    <div className="activity-detail">
+                      <span className="activity-label">Time</span>
+                      <span>{(activity.elapsed_time / 60).toFixed(0)} min</span>
+                    </div>
+                    <div className="activity-detail">
+                      <span className="activity-label">Distance</span>
+                      <span>{(activity.distance / 1000).toFixed(2)} km</span>
+                    </div>
+                    <div className="activity-detail">
+                      <span className="activity-label">Heart Rate</span>
+                      <span>{activity.average_heartrate} bpm</span>
+                    </div>
+                    {activity.type === "Run" && (
+                      <div className="activity-detail">
+                        <span className="activity-label">Pace</span>
+                        <span>
+                          {formatPace(activity.distance, activity.moving_time)}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <SemaineStrava activites={data} />
+        </>
       )}
+    </div>
+  );
+};
+
+const SemaineStrava = ({ activites }) => {
+  const [joursSemaine, setJoursSemaine] = useState([]);
+
+  useEffect(() => {
+    const calculerJoursSemaine = () => {
+      const jours = [];
+      const dateActuelle = new Date();
+      const jourSemaine = dateActuelle.getDay(); // 0 pour Dimanche, 1 pour Lundi, ..., 6 pour Samedi
+
+      // Trouver le Lundi de la semaine actuelle
+      const lundiDeCetteSemaine = new Date(dateActuelle);
+      lundiDeCetteSemaine.setDate(
+        dateActuelle.getDate() - jourSemaine + (jourSemaine === 0 ? -6 : 1)
+      );
+
+      // Remplir les 7 jours à partir de Lundi
+      for (let i = 0; i < 7; i++) {
+        const nouveauJour = new Date(lundiDeCetteSemaine);
+        nouveauJour.setDate(lundiDeCetteSemaine.getDate() + i);
+        jours.push(nouveauJour);
+      }
+
+      setJoursSemaine(jours);
+    };
+
+    calculerJoursSemaine();
+  }, []);
+
+  const formaterDate = (date) => {
+    return date.toISOString().split("T")[0]; // Formater la date en YYYY-MM-DD
+  };
+
+  return (
+    <div>
+      <h2>Your week</h2>
+      <div className="week">
+        {joursSemaine.map((jour, index) => {
+          const activitePourLeJour = activites.find(
+            (activite) =>
+              formaterDate(new Date(activite.start_date)) === formaterDate(jour)
+          );
+
+          return (
+            <div
+              key={index}
+              className={`day ${activitePourLeJour ? "with-activity" : ""}`}
+            >
+              <p>
+                {jour.toLocaleDateString("en-EN", {
+                  day: "numeric",
+                })}
+                <br></br>
+                {jour.toLocaleDateString("en-EN", {
+                  weekday: "short",
+                })}
+              </p>
+
+              {/* Ajout de l'icône de coche si l'activité est présente */}
+              {activitePourLeJour && (
+                <div className="check-icon">
+                  <FaCheck />
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };

@@ -78,6 +78,48 @@
   font-size: 1rem;
   margin-bottom: 0.4rem;
 }
+
+.week {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0;
+  background-color: #8a8888;
+  padding: 5vh;
+}
+
+.day {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 3vw;
+  text-align: center;
+  background-color: #fff;
+}
+
+.day.with-activity {
+  background-color: $blue-light;
+
+  font-weight: bold;
+  border-radius: 10% / 50%;
+}
+
+.day.with-activity:hover {
+  background-color: $main-blue;
+}
+
+.check-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3vw; /* Ajustez la taille selon vos besoins */
+  height: 4.35 vh; /* Ajustez la taille selon vos besoins */
+  border-radius: 50%; /* Bord rond */
+  border: 2px solid green; /* Bordure autour de l'icône */
+  background-color: white; /* Fond de l'icône, ajustez selon vos besoins */
+
+  font-size: 1rem; /* Taille de l'icône */
+}
+
 @media (max-width: 1000px) {
   .dashboard-activities {
     margin-top: 50%;
